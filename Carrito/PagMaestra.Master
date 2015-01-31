@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PagMaestra.master.cs" Inherits="Carrito.PagMaestra" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ECommerce</title>
+
+    <!--<link rel="Stylesheet" type="text/css"" href="StyleSheet.css" />-->
+    <link id="siteCss" runat="server" href="~/css/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/shop-homepage.css" rel="stylesheet" />
+     
+    <style type="text/css">
+     
+        .botoncarrito
+        {
+            background-color: #009700;
+            color: #FFFFFF;
+            height: 32px;
+            width: 120px;
+            float: right;
+            font-size: medium;
+        }         
+         
+        .bienvenido
+        {
+            color: Green;
+            position: relative;
+            display: block;     
+            padding-top : 15px;
+            margin-right: 30px; 
+        }
+        
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="FormPrincipal.aspx">Productos</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <asp:Button ID="BtnCarrito" runat="server" CssClass="cerrarSesion" 
+                                onclick="BtnCarrito_Click" Text="Carrito (0)"></asp:Button>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <asp:Label ID="LabelBienvenida" runat="server" Text="Bienvenido" CssClass="bienvenido"></asp:Label>
+                        </li>
+                        <li>
+                            <asp:Button ID="BtnIniciaSesion" runat="server" Text="Iniciar Sesión" 
+                            CssClass="cerrarSesion" onclick="BtnIniciaSesion_Click" />
+                        </li> 
+                        <li>
+                            <asp:Button ID="BtnCerrarSesion" runat="server" CssClass="cerrarSesion"
+                            Text="Cerrar Sesión" onclick="BtnCerrarSesion_Click"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>      
+        </nav>  
+
+        <div class='container'>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">    
+            </asp:ContentPlaceHolder>
+        </div>
+ 
+    </form>
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+C:\Users\JUAN\Desktop\Programacion C\Carrito\Carrito\Carrito\bin\Carrito.dll
+C:\Users\JUAN\Desktop\Programacion C\Carrito\Carrito\Carrito\bin\Carrito.pdb
+C:\Users\JUAN\Desktop\Programacion C\Carrito\Carrito\Carrito\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\JUAN\Desktop\Programacion C\Carrito\Carrito\Carrito\obj\Debug\Carrito.dll
+C:\Users\JUAN\Desktop\Programacion C\Carrito\Carrito\Carrito\obj\Debug\Carrito.pdb
+D:\Programacion C\Carrito\Carrito\Carrito\bin\Carrito.dll
+D:\Programacion C\Carrito\Carrito\Carrito\bin\Carrito.pdb
+D:\Programacion C\Carrito\Carrito\Carrito\obj\Debug\Carrito.dll
+D:\Programacion C\Carrito\Carrito\Carrito\obj\Debug\Carrito.pdb
+D:\Programacion C\Carrito\Carrito\Carrito\obj\Debug\Carrito.csprojResolveAssemblyReference.cache
