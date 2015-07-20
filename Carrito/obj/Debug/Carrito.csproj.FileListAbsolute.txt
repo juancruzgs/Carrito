@@ -8,3 +8,8 @@ D:\Programacion C\Carrito\Carrito\Carrito\bin\Carrito.pdb
 D:\Programacion C\Carrito\Carrito\Carrito\obj\Debug\Carrito.dll
 D:\Programacion C\Carrito\Carrito\Carrito\obj\Debug\Carrito.pdb
 D:\Programacion C\Carrito\Carrito\Carrito\obj\Debug\Carrito.csprojResolveAssemblyReference.cache
+D:\Programacion C\Carrito\Carrito\bin\Carrito.dll
+D:\Programacion C\Carrito\Carrito\bin\Carrito.pdb
+D:\Programacion C\Carrito\Carrito\obj\Debug\Carrito.csprojResolveAssemblyReference.cache
+D:\Programacion C\Carrito\Carrito\obj\Debug\Carrito.dll
+D:\Programacion C\Carrito\Carrito\obj\Debug\Carrito.pdb

@@ -34,13 +34,13 @@ namespace Carrito
                     return "<del>$" + String.Format("{0:f2}", Eval("PrecioNormal")) + "</del>";
                 else
                 {
-                    return "<span style=\"color:Red;\">$" + String.Format("{0:f2}", Eval("PrecioNormal"))+"</span>";
+                    return "<span style=\"color:Red;\">$" + String.Format("{0:f2}", Eval("PrecioNormal")) + "</span>";
                 }
             }
             else
             {
                 return "";
-            }            
+            }
         }
 
 
@@ -50,7 +50,7 @@ namespace Carrito
             if (mpButton != null)
             {
                 mpButton.Text = "Carrito (" + ocarrito.cantidadElementos().ToString() + ")";
-            }   
+            }
         }
 
 
@@ -67,7 +67,7 @@ namespace Carrito
             DataTable dtTable = categorias.traerCategorias();
 
             foreach (DataRow dtRow in dtTable.Rows)
-            {                
+            {
                 string desc = dtRow["Descripcion"].ToString();
                 Button boton = new Button();
                 boton.Text = desc;
@@ -85,7 +85,7 @@ namespace Carrito
 
         }
 
-          
+
         protected void BtnCategorias_Click(object sender, EventArgs e)
         {
 
@@ -101,56 +101,78 @@ namespace Carrito
                         btAux.CssClass = "list-group-item"; //Sacar la selección a todos los botones
                     }
                 }
-                
+
                 Productos oproductos = new Productos();
-                GridView1.DataSource = oproductos.traerProductosPorCategoria(boton.Text);
-                GridView1.DataBind();
+                //GridView1.DataSource = oproductos.traerProductosPorCategoria(boton.Text);
+                //GridView1.DataBind();
 
                 boton.CssClass = "list-group-item active"; //Seleccionar el boton clickeado
                 RepeaterItems.DataSource = oproductos.traerProductosPorCategoria(boton.Text);
                 RepeaterItems.DataBind();
-            }   
+            }
 
         }
 
-       
-        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "Agregar")
+        //    {
+        //        if (User.Identity.IsAuthenticated) //Debe logearse para agregar productos al carrito
+        //        {
+        //            LabelError.Text = "";
+
+        //            int index = Convert.ToInt32(e.CommandArgument);
+        //            GridViewRow row = GridView1.Rows[index];
+        //            int IdProducto = Convert.ToInt32(row.Cells[2].Text);
+
+        //            try
+        //            {
+        //                ocarrito.insertaCarrito(IdProducto, 1);
+        //                actualizarCarrito();
+        //            }
+        //            catch (SqlException ex)
+        //            {
+        //                LabelError.Text = "* " + ex.Message;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            FormsAuthentication.RedirectToLoginPage();
+        //        }
+
+        //    }
+        //}
+
+
+        //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+
+        //}
+
+        protected void RepeaterItems_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "Agregar") 
+            if (e.CommandName == "Agregar")
             {
                 if (User.Identity.IsAuthenticated) //Debe logearse para agregar productos al carrito
                 {
                     LabelError.Text = "";
-
-                    int index = Convert.ToInt32(e.CommandArgument);
-                    GridViewRow row = GridView1.Rows[index];
-                    int IdProducto = Convert.ToInt32(row.Cells[2].Text);
+                    int idProducto = Convert.ToInt32(e.CommandArgument);
 
                     try
                     {
-                        ocarrito.insertaCarrito(IdProducto, 1);
+                        ocarrito.insertaCarrito(idProducto, 1);
                         actualizarCarrito();
-                        
                     }
                     catch (SqlException ex)
                     {
-                        LabelError.Text = "* "+ex.Message;
+                        LabelError.Text = "* " + ex.Message;
                     }
                 }
                 else
                 {
                     FormsAuthentication.RedirectToLoginPage();
                 }
-                    
             }
         }
-
-
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-      
     }
 }

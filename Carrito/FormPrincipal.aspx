@@ -39,7 +39,8 @@
                 
                 <div class="row">
 
-                    <asp:Repeater ID="RepeaterItems" runat="server">
+                    <asp:Repeater ID="RepeaterItems" runat="server" 
+                        onitemcommand="RepeaterItems_ItemCommand" EnableViewState="True">
                         <ItemTemplate>
                             <div class="col-sm-4 col-lg-4 col-md-4">
                                 <div class="thumbnail" style="height: 450px;">
@@ -50,8 +51,8 @@
                                         <div style="position: absolute; right: 50px; bottom: 50px;">
                                         <h4 class="pull-right"><%# getPrecioNormal() %></h4>
                                         <h4 class="pull-right" style="color:Red; padding-right:15px"><strong><%# getPrecioOferta() %></strong></h4>
-                                        </div>
-                                        <asp:Button ID="ButtonAgregar" runat="server" Text="Comprar" CssClass="btn btn-success" style="position: absolute; right: 20px; bottom: 25px; width:250px" />
+                                        </div>                                       
+                                        <asp:Button ID="ButtonAgregar" runat="server" Text="Comprar" CssClass="btn btn-success" style="position: absolute; right: 20px; bottom: 25px; width:250px" CommandName="Agregar" CommandArgument='<%# Eval("IdProducto")%>'/>
                                     </div>
                                 </div>
                             </div>
@@ -66,12 +67,14 @@
 
     </div>
 
-    <div>
+    <asp:Label ID="LabelError" runat="server" CssClass="labelerror"></asp:Label>
+
+    <!--<div>
 
         <asp:GridView ID="GridView1" runat="server" style="width: 73px" 
-            onrowcommand="GridView1_RowCommand" AutoGenerateColumns="False" 
+            AutoGenerateColumns="False" 
             BorderStyle="Solid" GridLines="Vertical" Font-Bold="True" 
-            Font-Size="Large" onselectedindexchanged="GridView1_SelectedIndexChanged">
+            Font-Size="Large" SortedAscendingHeaderStyle-Wrap="False">
 
             <Columns>
 
@@ -100,9 +103,7 @@
             <HeaderStyle BackColor="#008AE6" />
            
         </asp:GridView>
-        
-        <asp:Label ID="LabelError" runat="server" CssClass="labelerror"></asp:Label>
 
-    </div>
+    </div>-->
 
 </asp:Content>
