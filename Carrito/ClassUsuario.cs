@@ -14,7 +14,7 @@ namespace Carrito
 
         public DataTable infoUsuario(string nombreUsuario, string contraseña)
         {
-            string cmd = "SELECT IdUsuario,Permiso,NombreUsuario FROM Usuario WHERE NombreUsuario='" + nombreUsuario + "' and Contraseña='" + contraseña + "'";
+            string cmd = "SELECT IdUsuario,Permiso,NombreUsuario FROM Usuario WHERE NombreUsuario='" + nombreUsuario + "' COLLATE Modern_Spanish_CS_AS and Contraseña='" + contraseña + "' COLLATE Modern_Spanish_CS_AS";
             DataTable dt = oconexion.leerdatos(cmd);
             return dt;
         }
