@@ -18,6 +18,13 @@
               background-color: #f5f5f5;
             }
             
+            #precios {
+              position: absolute; 
+              bottom: 50px; 
+              width: 242px; 
+              text-align: center; 
+              float: left; 
+            }
         </style>
 
 </asp:Content>
@@ -48,10 +55,9 @@
                                     <div class="caption">
                                         <h4 style="color:#337AB7"><%# Eval("Nombre")%></h4>
                                         <p><%# Eval("Descripcion")%></p>
-                                        <div style="position: absolute; right: 50px; bottom: 50px;">
-                                        <h4 class="pull-right"><%# getPrecioNormal() %></h4>
-                                        <h4 class="pull-right" style="color:Red; padding-right:15px"><strong><%# getPrecioOferta() %></strong></h4>
-                                        </div>                                       
+                                        <h4 id="precios">
+                                            <span style="color:Red; margin-right: 15px;"><strong><%# getPrecioOferta() %></strong></span><%# getPrecioNormal() %>
+                                        </h4>                                                                             
                                         <asp:Button ID="ButtonAgregar" runat="server" Text="Comprar" CssClass="btn btn-success" style="position: absolute; right: 20px; bottom: 25px; width:250px" CommandName="Agregar" CommandArgument='<%# Eval("IdProducto")%>'/>
                                     </div>
                                 </div>

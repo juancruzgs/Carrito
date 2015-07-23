@@ -19,9 +19,9 @@ namespace Carrito
             LabelBienvenida.Visible = HttpContext.Current.User.Identity.IsAuthenticated;
             BtnCarrito.Visible = HttpContext.Current.User.Identity.IsAuthenticated; 
 
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            if (HttpContext.Current.User.Identity.IsAuthenticated && Session["Nombre"]!=null)
             {
-                LabelBienvenida.Text = LabelBienvenida.Text + " " + Session["Nombre"].ToString() + "!";        
+                LabelBienvenida.Text = "Bienvenido " + Session["Nombre"].ToString() + "!";        
             }
         }
 

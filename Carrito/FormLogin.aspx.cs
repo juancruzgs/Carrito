@@ -28,7 +28,7 @@ namespace Carrito
                 Session["Permiso"] = dt.Rows[0][1].ToString();
                 Session["Nombre"] = dt.Rows[0][2].ToString();
 
-                FormsAuthentication.RedirectFromLoginPage(Login1.UserName, true);
+                FormsAuthentication.RedirectFromLoginPage(Login1.UserName, false);
                 
             }
         }

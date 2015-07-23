@@ -34,7 +34,7 @@ namespace Carrito
                     return "<del>$" + String.Format("{0:f2}", Eval("PrecioNormal")) + "</del>";
                 else
                 {
-                    return "<span style=\"color:Red;\">$" + String.Format("{0:f2}", Eval("PrecioNormal")) + "</span>";
+                    return "<span style=\"color:Red;\"><strong>$" + String.Format("{0:f2}", Eval("PrecioNormal")) + "</strong></span>";
                 }
             }
             else
