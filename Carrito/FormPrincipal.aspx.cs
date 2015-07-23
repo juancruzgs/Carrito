@@ -12,7 +12,7 @@ namespace Carrito
 {
     public partial class FormPrincipal : System.Web.UI.Page
     {
-        Carrito ocarrito;
+        //Carrito ocarrito;
 
         protected string getPrecioOferta()
         {
@@ -44,16 +44,6 @@ namespace Carrito
         }
 
 
-        protected void actualizarCarrito()
-        {
-            Button mpButton = (Button)Master.FindControl("BtnCarrito");
-            if (mpButton != null)
-            {
-                mpButton.Text = "Carrito (" + ocarrito.cantidadElementos().ToString() + ")";
-            }
-        }
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -76,13 +66,6 @@ namespace Carrito
                 boton.Click += new EventHandler(this.BtnCategorias_Click);
                 PanelCategorias.Controls.Add(boton);
             }
-
-            if (User.Identity.IsAuthenticated)
-            {
-                ocarrito = new Carrito(Convert.ToInt32(Session["Usuario"]));
-                actualizarCarrito();
-            }
-
         }
 
 
@@ -103,8 +86,6 @@ namespace Carrito
                 }
 
                 Productos oproductos = new Productos();
-                //GridView1.DataSource = oproductos.traerProductosPorCategoria(boton.Text);
-                //GridView1.DataBind();
 
                 boton.CssClass = "list-group-item active"; //Seleccionar el boton clickeado
                 RepeaterItems.DataSource = oproductos.traerProductosPorCategoria(boton.Text);
@@ -112,42 +93,6 @@ namespace Carrito
             }
 
         }
-
-        //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    if (e.CommandName == "Agregar")
-        //    {
-        //        if (User.Identity.IsAuthenticated) //Debe logearse para agregar productos al carrito
-        //        {
-        //            LabelError.Text = "";
-
-        //            int index = Convert.ToInt32(e.CommandArgument);
-        //            GridViewRow row = GridView1.Rows[index];
-        //            int IdProducto = Convert.ToInt32(row.Cells[2].Text);
-
-        //            try
-        //            {
-        //                ocarrito.insertaCarrito(IdProducto, 1);
-        //                actualizarCarrito();
-        //            }
-        //            catch (SqlException ex)
-        //            {
-        //                LabelError.Text = "* " + ex.Message;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            FormsAuthentication.RedirectToLoginPage();
-        //        }
-
-        //    }
-        //}
-
-
-        //protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-
-        //}
 
         protected void RepeaterItems_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -160,8 +105,9 @@ namespace Carrito
 
                     try
                     {
-                        ocarrito.insertaCarrito(idProducto, 1);
-                        actualizarCarrito();
+                        PagMaestra master = (PagMaestra)this.Master;
+                        master.insertaCarrito(idProducto, 1);
+                        master.actualizarCarrito();
                     }
                     catch (SqlException ex)
                     {

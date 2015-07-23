@@ -51,7 +51,7 @@
                         <ItemTemplate>
                             <div class="col-sm-4 col-lg-4 col-md-4">
                                 <div class="thumbnail" style="height: 450px;">
-                                    <img src="<%# Eval("Foto")%>" alt="">
+                                    <img src="<%# Eval("Foto")%>" alt="" style="height : 200px" >
                                     <div class="caption">
                                         <h4 style="color:#337AB7"><%# Eval("Nombre")%></h4>
                                         <p><%# Eval("Descripcion")%></p>
@@ -74,42 +74,5 @@
     </div>
 
     <asp:Label ID="LabelError" runat="server" CssClass="labelerror"></asp:Label>
-
-    <!--<div>
-
-        <asp:GridView ID="GridView1" runat="server" style="width: 73px" 
-            AutoGenerateColumns="False" 
-            BorderStyle="Solid" GridLines="Vertical" Font-Bold="True" 
-            Font-Size="Large" SortedAscendingHeaderStyle-Wrap="False">
-
-            <Columns>
-
-                <asp:ButtonField ButtonType="Button" Text="Agregar a Carrito" 
-                    CommandName="Agregar" ControlStyle-Width="150px" 
-                    ControlStyle-CssClass="botoncarrito" >
-                    <ControlStyle CssClass="botoncarrito" Width="150px"></ControlStyle>
-                </asp:ButtonField>
-
-                <asp:ImageField DataImageUrlField="Foto" HeaderText="Imagen"></asp:ImageField>
-                <asp:BoundField DataField="IdProducto" HeaderText="Código" />
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
-                <asp:BoundField DataField="PrecioNormal" HeaderText="Precio Normal" 
-                    DataFormatString="$ {0:F2}" ItemStyle-Wrap="False" ItemStyle-Width="100px" >
-                    <ItemStyle Wrap="False" Width="100px"></ItemStyle>
-                </asp:BoundField>
-
-                <asp:BoundField DataField="PrecioOferta" HeaderText="Precio Oferta" 
-                    DataFormatString="$ {0:F2}" ItemStyle-Wrap="False" ItemStyle-Width="100px" >
-                    <ItemStyle Wrap="False" Width="100px"></ItemStyle>
-                </asp:BoundField>
-
-            </Columns>
-           
-            <HeaderStyle BackColor="#008AE6" />
-           
-        </asp:GridView>
-
-    </div>-->
 
 </asp:Content>

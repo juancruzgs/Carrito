@@ -10,7 +10,7 @@ namespace Carrito
 {
     public partial class PagMaestra : System.Web.UI.MasterPage
     {
-
+        Carrito ocarrito;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,8 +21,20 @@ namespace Carrito
 
             if (HttpContext.Current.User.Identity.IsAuthenticated && Session["Nombre"]!=null)
             {
-                LabelBienvenida.Text = "Bienvenido " + Session["Nombre"].ToString() + "!";        
+                LabelBienvenida.Text = "Bienvenido " + Session["Nombre"].ToString() + "!";
+                ocarrito = new Carrito(Convert.ToInt32(Session["Usuario"]));
+                actualizarCarrito();
             }
+        }
+
+        public void insertaCarrito(int idProducto, int cantidad)
+        {
+            ocarrito.insertaCarrito(idProducto, cantidad);
+        }
+
+        public void actualizarCarrito()
+        {
+            BtnCarrito.Text = "Carrito (" + ocarrito.cantidadElementos().ToString() + ")";
         }
 
         protected void BtnCerrarSesion_Click(object sender, EventArgs e)
