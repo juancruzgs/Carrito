@@ -10,29 +10,6 @@
     <link id="siteCss" runat="server" href="~/css/StyleSheet.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/shop-homepage.css" rel="stylesheet" />
-     
-    <style type="text/css">
-     
-        .botoncarrito
-        {
-            background-color: #009700;
-            color: #FFFFFF;
-            height: 32px;
-            width: 120px;
-            float: right;
-            font-size: medium;
-        }         
-         
-        .bienvenido
-        {
-            color: Green;
-            position: relative;
-            display: block;     
-            padding-top : 15px;
-            margin-right: 30px; 
-        }
-        
-    </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>

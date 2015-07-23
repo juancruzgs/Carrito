@@ -21,7 +21,7 @@ namespace Carrito
 
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                //LabelBienvenida.Text = LabelBienvenida.Text + ' '+ Session["Nombre"].ToString() + '!';        
+                LabelBienvenida.Text = LabelBienvenida.Text + " " + Session["Nombre"].ToString() + "!";        
             }
         }
 
