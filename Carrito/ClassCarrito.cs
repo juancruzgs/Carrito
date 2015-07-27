@@ -9,7 +9,7 @@ namespace Carrito
 {
     public class Carrito
     {
-        Conexion oconexion = new Conexion();
+        Conexion conexion = new Conexion();
         int idUsuario;
 
         public Carrito(int idUsuario)
@@ -26,7 +26,7 @@ namespace Carrito
 
             try
             {
-            oconexion.ejecutarProc("InsertaDetalle", parametros);
+            conexion.ejecutarProc("InsertaDetalle", parametros);
             }
             catch (SqlException ex)
             {
@@ -38,7 +38,7 @@ namespace Carrito
         {
             string cmd = "SELECT COUNT(*) FROM CarritoDetalle cd JOIN Carrito c on c.IdCarrito=cd.IdCarrito WHERE c.IdUsuario='" + idUsuario + "'";
 
-            int resultado = Convert.ToInt32(oconexion.ejecutarescalar(cmd));
+            int resultado = Convert.ToInt32(conexion.ejecutarescalar(cmd));
             return resultado;
         }
 
@@ -47,7 +47,7 @@ namespace Carrito
             string cmd = "SELECT p.IdProducto,p.Nombre,p.Descripcion,cd.Cantidad,cd.PrecioLista,cd.Subtotal,cd.TotalIva,cd.PrecioFinal"+
                         " FROM CarritoDetalle cd JOIN Carrito c on c.IdCarrito=cd.IdCarrito JOIN Productos p on p.IdProducto=cd.IdProducto"+
                         " WHERE c.IdUsuario='" + idUsuario + "'";
-            DataTable dtdetalle = oconexion.leerdatos(cmd);
+            DataTable dtdetalle = conexion.leerdatos(cmd);
            
             return dtdetalle;
         }
@@ -58,7 +58,7 @@ namespace Carrito
             parametros[0] = new SqlParameter("@IdUsuario", idUsuario);
             parametros[1] = new SqlParameter("@IdProducto", idProducto);
            
-            oconexion.ejecutarProc("EliminaProductoDetalle", parametros);
+            conexion.ejecutarProc("EliminaProductoDetalle", parametros);
         }
 
         public void actualizaCantidad(int idProducto, int cantidad)
@@ -70,7 +70,7 @@ namespace Carrito
 
             try
             {
-                oconexion.ejecutarProc("ActualizaCantidad", parametros);
+                conexion.ejecutarProc("ActualizaCantidad", parametros);
             }
             catch (SqlException ex)
             {
@@ -83,14 +83,14 @@ namespace Carrito
             SqlParameter[] parametros = new SqlParameter[1];
             parametros[0] = new SqlParameter("@IdUsuario", idUsuario);
 
-            oconexion.ejecutarProc("EliminaCarrito", parametros);
+            conexion.ejecutarProc("EliminaCarrito", parametros);
         }
 
         public decimal totalCarrito()
         {
             string cmd = "SELECT Total FROM Carrito WHERE IdUsuario='" + idUsuario + "'";
 
-            decimal resultado=Convert.ToDecimal( oconexion.ejecutarescalar(cmd));
+            decimal resultado=Convert.ToDecimal( conexion.ejecutarescalar(cmd));
             return resultado;
         }
     }

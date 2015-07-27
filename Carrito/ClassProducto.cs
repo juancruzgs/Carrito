@@ -11,7 +11,7 @@ namespace Carrito
     {
         Conexion oconexion = new Conexion();
 
-        public DataTable traerProductosPorCategoria(int idCategoria)
+        public DataTable listarProductosPorCategoria(int idCategoria)
         {
             string cmdtext = "SELECT p.IdProducto,p.Nombre,p.Descripcion,p.PrecioNormal,p.PrecioOferta,p.Foto "+
              "FROM Productos p JOIN Categorias c on c.IdCategoria=p.IdCategoria WHERE c.IdCategoria="+idCategoria;
@@ -19,7 +19,7 @@ namespace Carrito
             return dtcategorias;
         }
 
-        public DataTable traerProductosPorCategoria(string descripcionCategoria)
+        public DataTable listarProductosPorCategoria(string descripcionCategoria)
         {
             string cmdtext = "SELECT p.IdProducto,p.Nombre,p.Descripcion,p.PrecioNormal,p.PrecioOferta,p.Foto " +
              "FROM Productos p JOIN Categorias c on c.IdCategoria=p.IdCategoria WHERE c.Descripcion='" + descripcionCategoria+'\'';
@@ -27,7 +27,7 @@ namespace Carrito
             return dtcategorias;
         }
 
-        public DataTable traerProductosEnOferta()
+        public DataTable listarProductosEnOferta()
         {
             string cmdtext = "SELECT IdProducto,Nombre,Descripcion,PrecioNormal,PrecioOferta,Foto " +
              "FROM Productos WHERE PrecioOferta IS NOT NULL";

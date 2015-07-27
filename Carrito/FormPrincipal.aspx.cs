@@ -12,7 +12,6 @@ namespace Carrito
 {
     public partial class FormPrincipal : System.Web.UI.Page
     {
-        //Carrito ocarrito;
 
         protected string getPrecioOferta()
         {
@@ -48,8 +47,8 @@ namespace Carrito
         {
             if (!Page.IsPostBack)
             {
-                Productos oproductos = new Productos();
-                RepeaterItems.DataSource = oproductos.traerProductosEnOferta();
+                Productos productos = new Productos();
+                RepeaterItems.DataSource = productos.listarProductosEnOferta();
                 RepeaterItems.DataBind();
             }
 
@@ -88,10 +87,9 @@ namespace Carrito
                 Productos oproductos = new Productos();
 
                 boton.CssClass = "list-group-item active"; //Seleccionar el boton clickeado
-                RepeaterItems.DataSource = oproductos.traerProductosPorCategoria(boton.Text);
+                RepeaterItems.DataSource = oproductos.listarProductosPorCategoria(boton.Text);
                 RepeaterItems.DataBind();
             }
-
         }
 
         protected void RepeaterItems_ItemCommand(object source, RepeaterCommandEventArgs e)

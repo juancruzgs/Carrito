@@ -11,20 +11,12 @@ namespace Carrito
 {
     public partial class FormCarrito : System.Web.UI.Page
     {
-        Carrito ocarrito;
-
-        protected void actualizarCarrito()
-        {
-            Button mpButton = (Button)Master.FindControl("BtnCarrito");
-            if (mpButton != null)
-            {
-                mpButton.Text = "Carrito (" + ocarrito.cantidadElementos().ToString() + ")";
-            }
-        }
-
+        Carrito carrito;
+        PagMaestra master;
        
-        protected void Page_Preinit(object sender, EventArgs e) /*Para validar que el usuario este logeado*/
+        protected void Page_Preinit(object sender, EventArgs e) 
         {
+            /*Validar que el usuario este logeado*/
             if (!User.Identity.IsAuthenticated)
             {
                 FormsAuthentication.RedirectToLoginPage();
@@ -33,57 +25,52 @@ namespace Carrito
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ocarrito = new Carrito(Convert.ToInt32(Session["Usuario"]));
+            carrito = new Carrito(Convert.ToInt32(Session["Usuario"]));
+            master = (PagMaestra)this.Master;
 
             if (!Page.IsPostBack)
             {
-                GridDetalle.DataSource = ocarrito.listarDetalle();
+                GridDetalle.DataSource = carrito.listarDetalle();
                 GridDetalle.DataBind();
 
-                LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}",ocarrito.totalCarrito() );
+                LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}",carrito.totalCarrito());
             }
-
         }
       
         protected void GridDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-
             int index = Convert.ToInt32(e.RowIndex); 
             GridViewRow row = GridDetalle.Rows[index];
 
             int idProducto = Convert.ToInt32(row.Cells[0].Text);
-            ocarrito.eliminaProductoDetalle(idProducto);
+            carrito.eliminaProductoDetalle(idProducto);
 
-            GridDetalle.DataSource = ocarrito.listarDetalle();
+            GridDetalle.DataSource = carrito.listarDetalle();
             GridDetalle.DataBind();
 
-            LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", ocarrito.totalCarrito());
-            actualizarCarrito();
+            LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", carrito.totalCarrito());
+            master.actualizarCarrito();
         }
 
         protected void GridDetalle_RowEditing(object sender, GridViewEditEventArgs e)
         {
-
             GridDetalle.EditIndex = e.NewEditIndex;
             LabelError.Text = "";
             
-            GridDetalle.DataSource = ocarrito.listarDetalle();
+            GridDetalle.DataSource = carrito.listarDetalle();
             GridDetalle.DataBind();
         }
 
         protected void GridDetalle_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-
             GridDetalle.EditIndex = -1;
 
-            GridDetalle.DataSource = ocarrito.listarDetalle();
+            GridDetalle.DataSource = carrito.listarDetalle();
             GridDetalle.DataBind();
         }
 
         protected void GridDetalle_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            Productos oproducto = new Productos();
-
             GridViewRow row = GridDetalle.Rows[e.RowIndex];
             TextBox txtCantidad = (TextBox)row.Cells[3].Controls[0];
 
@@ -91,7 +78,7 @@ namespace Carrito
             {
                 int cantidad = Convert.ToInt32(txtCantidad.Text);
                 int idProducto = Convert.ToInt32(row.Cells[0].Text);
-                ocarrito.actualizaCantidad(idProducto, cantidad);
+                carrito.actualizaCantidad(idProducto, cantidad);
             }
             catch (FormatException) //No se ingreso un número en la cantidad
             {
@@ -105,31 +92,31 @@ namespace Carrito
             {
                 GridDetalle.EditIndex = -1;
 
-                GridDetalle.DataSource = ocarrito.listarDetalle();
+                GridDetalle.DataSource = carrito.listarDetalle();
                 GridDetalle.DataBind();
 
-                LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", ocarrito.totalCarrito());
+                LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", carrito.totalCarrito());
             }
         }
 
         protected void BtnEliminaCarrito_Click(object sender, EventArgs e)
         {
-            ocarrito.eliminaCarrito();
+            carrito.eliminaCarrito();
 
-            GridDetalle.DataSource = ocarrito.listarDetalle();
+            GridDetalle.DataSource = carrito.listarDetalle();
             GridDetalle.DataBind();
 
-            LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", ocarrito.totalCarrito());
-            actualizarCarrito();
+            LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", carrito.totalCarrito());
+            master.actualizarCarrito(); 
 
         }
 
         protected void BtnConfirmaCompra_Click(object sender, EventArgs e)
         {
-            Compra ocompra = new Compra();
+            Compra compra = new Compra();
 
-            ocompra.insertaCompra(Convert.ToInt32(Session["Usuario"]), 10); //$10 de envio 
-            ocarrito.eliminaCarrito();
+            compra.insertaCompra(Convert.ToInt32(Session["Usuario"]), 10); //$10 de envio 
+            carrito.eliminaCarrito();
 
             Response.Redirect("FormPrincipal.aspx");
         }

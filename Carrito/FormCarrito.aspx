@@ -14,11 +14,12 @@
     <div>
 
         <asp:GridView ID="GridDetalle" runat="server" 
-                onrowdeleting="GridDetalle_RowDeleting" AutoGenerateColumns="False" 
+                onrowdeleting="GridDetalle_RowDeleting" 
                 onrowcancelingedit="GridDetalle_RowCancelingEdit" 
                 onrowediting="GridDetalle_RowEditing" onrowupdating="GridDetalle_RowUpdating"
-                BorderStyle="Solid" GridLines="Vertical" Font-Bold="True" 
-                Font-Size="Large">
+                AutoGenerateColumns="False" 
+                CellPadding="4"
+                CssClass="table table-striped table-bordered">
 
             <Columns>
 
