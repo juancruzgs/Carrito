@@ -16,8 +16,14 @@
     color: #FFFFFF;
 }
 
+.labeltotaltext
+{
+    font-size: 18px;
+}
+
 .labeltotal
 {
+    font-size: 18px;
     color: #059225;
 }
 
@@ -33,7 +39,7 @@
 
 .labelerror
 {
-    font-size: large;
+    font-size: l8px;
     color: #FF0000;
 }
 

@@ -25,6 +25,7 @@ namespace Carrito
             }
         }
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             carrito = new Carrito(Convert.ToInt32(Session["Usuario"]));
@@ -39,23 +40,6 @@ namespace Carrito
             }
         }
 
-        protected void BtnEliminaCarrito_Click(object sender, EventArgs e)
-        {
-            carrito.eliminaCarrito();
-
-            actualizarCarrito();
-            master.actualizarCarrito();
-        }
-
-        protected void BtnConfirmaCompra_Click(object sender, EventArgs e)
-        {
-            Compra compra = new Compra();
-
-            compra.insertaCompra(Convert.ToInt32(Session["Usuario"]), 10); //$10 de envio 
-            carrito.eliminaCarrito();
-
-            Response.Redirect("FormPrincipal.aspx");
-        }
 
         protected void GridDetalle_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -71,6 +55,16 @@ namespace Carrito
                 master.actualizarCarrito();
             }
         }
+
+
+        protected void BtnEliminaCarrito_Click(object sender, EventArgs e)
+        {
+            carrito.eliminaCarrito();
+
+            actualizarCarrito();
+            master.actualizarCarrito();
+        }
+
 
         protected void BtnActualizarCarrito_Click1(object sender, EventArgs e)
         {
@@ -92,11 +86,11 @@ namespace Carrito
             }
             catch (FormatException) //No se ingreso un número en la cantidad
             {
-                LabelError.Text = "* INGRESE UN NÚMERO ENTERO";
+                LabelError.Text = "* Ingrese un número entero positivo";
             }
             catch (SqlException ex) //Controla que haya stock del producto
             {
-                LabelError.Text = "* " + ex.Message;
+                LabelError.Text = "* No hay stock del producto";
             }
             finally
             {
@@ -104,6 +98,18 @@ namespace Carrito
                 master.actualizarCarrito();
             }
         }
+
+
+        protected void BtnConfirmaCompra_Click(object sender, EventArgs e)
+        {
+            Compra compra = new Compra();
+
+            compra.insertaCompra(Convert.ToInt32(Session["Usuario"]), 10); //$10 de envio 
+            carrito.eliminaCarrito();
+
+            Response.Redirect("FormPrincipal.aspx");
+        }
+
 
         private void actualizarCarrito()
         {

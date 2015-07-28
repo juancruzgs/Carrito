@@ -111,7 +111,7 @@ namespace Carrito
                     }
                     catch (SqlException ex)
                     {
-                        LabelError.Text = "* " + ex.Message;
+                        LabelError.Text = "* Ya existe el producto en su carrito";
                     }
                 }
                 else

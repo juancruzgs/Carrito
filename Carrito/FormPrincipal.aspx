@@ -31,7 +31,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="container">
-
         <div class="row">
 
             <div class="col-md-3">
@@ -42,8 +41,7 @@
                 </div>
             </div>
 
-            <div class="col-md-9">
-                
+            <div class="col-md-9">   
                 <div class="row">
 
                     <asp:Repeater ID="RepeaterItems" runat="server" 
@@ -66,11 +64,8 @@
                     </asp:Repeater>
 
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <asp:Label ID="LabelError" runat="server" CssClass="labelerror"></asp:Label>

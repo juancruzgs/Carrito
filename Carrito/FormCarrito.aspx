@@ -11,6 +11,7 @@
     </style>
     
     <SCRIPT language=Javascript>
+
            function isNumberKey(evt) {
                var charCode = (evt.which) ? evt.which : event.keyCode
                if (charCode > 31 && (charCode < 48 || charCode > 57))
@@ -18,6 +19,14 @@
 
                return true;
            }
+
+           function preguntar() {
+               eliminar = confirm("¿Está seguro que desea eliminar su carrito?");
+               if (eliminar) {
+                   document.getElementById('btnHandler').click();
+               }
+           }
+
    </SCRIPT>
 
 </asp:Content>
@@ -48,7 +57,7 @@
                 <asp:BoundField DataField="PrecioFinal" HeaderText="Precio Final" DataFormatString="{0:c}" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="BtnEliminaProducto" runat="server" Text="Eliminar" CommandName="EliminarProducto" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"/>
+                        <asp:Button ID="BtnEliminaProducto" runat="server" class="btn btn-danger" Text="Eliminar" CommandName="EliminarProducto" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             
@@ -61,7 +70,7 @@
 
     <div>
         <strong>
-            <asp:Label ID="LabelTotalText" runat="server" Text="Total: "></asp:Label> 
+            <asp:Label ID="LabelTotalText" runat="server" CssClass="labeltotaltext" Text="Total: "></asp:Label> 
             <asp:Label ID="LabelTotal" runat="server" CssClass="labeltotal"></asp:Label>
         </strong>
     </div>
@@ -70,22 +79,16 @@
         <asp:Label ID="LabelError" runat="server" CssClass="labelerror"></asp:Label> 
     </div>
         
-    <div style="height: 32px">
+    <div style="margin-top: 30px">
         <asp:Button ID="BtnEliminaCarrito" runat="server"
-                Text="Eliminar Carrito" CssClass="eliminacarrito" 
-            onclick="BtnEliminaCarrito_Click" Width="127px" />
-    </div><br />
+                Text="Eliminar Carrito" class="btn btn-danger" onclick="BtnEliminaCarrito_Click" />
     
-    <div style="height: 32px">
-        <asp:Button ID="BtnActualizarCarrito" runat="server"
-                Text="Actualizar" CssClass="eliminacarrito" 
-            Width="127px" onclick="BtnActualizarCarrito_Click1" />
-    </div><br />
+        <asp:Button ID="BtnActualizarCarrito" runat="server" style="margin-left: 15px; margin-right: 15px;"
+                Text="Actualizar" class="btn btn-success" onclick="BtnActualizarCarrito_Click1" />
 
-    <div>
-     <asp:Button ID="BtnConfirmaCompra" runat="server" Text="Confirmar Compra" 
-            CssClass="eliminacarrito" onclick="BtnConfirmaCompra_Click" 
-            Width="148px" />
+         <asp:Button ID="BtnConfirmaCompra" runat="server" Text="Confirmar Compra" 
+                class="btn btn-success" onclick="BtnConfirmaCompra_Click"  />
+
     </div>
 
 </asp:Content>
