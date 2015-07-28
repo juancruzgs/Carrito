@@ -33,9 +33,6 @@ namespace Carrito
 
             if (!Page.IsPostBack)
             {
-                GridDetalle.DataSource = carrito.listarDetalle();
-                GridDetalle.DataBind();
-
                 actualizarCarrito();
             }
         }
@@ -102,12 +99,7 @@ namespace Carrito
 
         protected void BtnConfirmaCompra_Click(object sender, EventArgs e)
         {
-            Compra compra = new Compra();
-
-            compra.insertaCompra(Convert.ToInt32(Session["Usuario"]), 10); //$10 de envio 
-            carrito.eliminaCarrito();
-
-            Response.Redirect("FormPrincipal.aspx");
+            Response.Redirect("FormConfirmaCompra.aspx");
         }
 
 

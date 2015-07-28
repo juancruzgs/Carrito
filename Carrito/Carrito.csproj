@@ -57,6 +57,7 @@
     <Content Include="css\shop-item.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="FormCarrito.aspx" />
+    <Content Include="FormConfirmaCompra.aspx" />
     <Content Include="FormLogin.aspx" />
     <Content Include="FormPrincipal.aspx" />
     <Content Include="Global.asax" />
@@ -85,6 +86,13 @@
     </Compile>
     <Compile Include="FormCarrito.aspx.designer.cs">
       <DependentUpon>FormCarrito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormConfirmaCompra.aspx.cs">
+      <DependentUpon>FormConfirmaCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormConfirmaCompra.aspx.designer.cs">
+      <DependentUpon>FormConfirmaCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormLogin.aspx.cs">
       <DependentUpon>FormLogin.aspx</DependentUpon>
