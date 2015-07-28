@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Data.SqlClient;
+using System.Collections.Specialized;
+using System.Collections;
 
 namespace Carrito
 {
@@ -13,8 +15,8 @@ namespace Carrito
     {
         Carrito carrito;
         PagMaestra master;
-       
-        protected void Page_Preinit(object sender, EventArgs e) 
+
+        protected void Page_Preinit(object sender, EventArgs e)
         {
             /*Validar que el usuario este logeado*/
             if (!User.Identity.IsAuthenticated)
@@ -33,69 +35,7 @@ namespace Carrito
                 GridDetalle.DataSource = carrito.listarDetalle();
                 GridDetalle.DataBind();
 
-                LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}",carrito.totalCarrito());
-            }
-        }
-      
-        protected void GridDetalle_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int index = Convert.ToInt32(e.RowIndex); 
-            GridViewRow row = GridDetalle.Rows[index];
-
-            int idProducto = Convert.ToInt32(row.Cells[0].Text);
-            carrito.eliminaProductoDetalle(idProducto);
-
-            GridDetalle.DataSource = carrito.listarDetalle();
-            GridDetalle.DataBind();
-
-            LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", carrito.totalCarrito());
-            master.actualizarCarrito();
-        }
-
-        protected void GridDetalle_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            GridDetalle.EditIndex = e.NewEditIndex;
-            LabelError.Text = "";
-            
-            GridDetalle.DataSource = carrito.listarDetalle();
-            GridDetalle.DataBind();
-        }
-
-        protected void GridDetalle_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            GridDetalle.EditIndex = -1;
-
-            GridDetalle.DataSource = carrito.listarDetalle();
-            GridDetalle.DataBind();
-        }
-
-        protected void GridDetalle_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            GridViewRow row = GridDetalle.Rows[e.RowIndex];
-            TextBox txtCantidad = (TextBox)row.Cells[3].Controls[0];
-
-            try
-            {
-                int cantidad = Convert.ToInt32(txtCantidad.Text);
-                int idProducto = Convert.ToInt32(row.Cells[0].Text);
-                carrito.actualizaCantidad(idProducto, cantidad);
-            }
-            catch (FormatException) //No se ingreso un número en la cantidad
-            {
-                LabelError.Text = "* INGRESE UN NÚMERO ENTERO";
-            }
-            catch (SqlException ex) //Controla que haya stock del producto
-            {
-                LabelError.Text = "* "+ex.Message;
-            }
-            finally
-            {
-                GridDetalle.EditIndex = -1;
-
-                GridDetalle.DataSource = carrito.listarDetalle();
-                GridDetalle.DataBind();
-
-                LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", carrito.totalCarrito());
+                actualizarCarrito();
             }
         }
 
@@ -103,12 +43,8 @@ namespace Carrito
         {
             carrito.eliminaCarrito();
 
-            GridDetalle.DataSource = carrito.listarDetalle();
-            GridDetalle.DataBind();
-
-            LabelTotal.Text = "TOTAL = $" + string.Format("{0:F2}", carrito.totalCarrito());
-            master.actualizarCarrito(); 
-
+            actualizarCarrito();
+            master.actualizarCarrito();
         }
 
         protected void BtnConfirmaCompra_Click(object sender, EventArgs e)
@@ -121,6 +57,74 @@ namespace Carrito
             Response.Redirect("FormPrincipal.aspx");
         }
 
+        protected void GridDetalle_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EliminarProducto")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = GridDetalle.Rows[index];
+
+                int idProducto = Convert.ToInt32(row.Cells[0].Text);
+                carrito.eliminaProductoDetalle(idProducto);
+
+                actualizarCarrito();
+                master.actualizarCarrito();
+            }
+        }
+
+        protected void BtnActualizarCarrito_Click1(object sender, EventArgs e)
+        {
+            try 
+            {
+                int[] idProductos = new int[GridDetalle.Rows.Count];
+                int[] cantidades = new int[GridDetalle.Rows.Count];
+                for (int i = 0; i < GridDetalle.Rows.Count; i++)
+                {
+                    GridViewRow row = GridDetalle.Rows[i];
+
+                    idProductos[i] = Convert.ToInt32(row.Cells[0].Text);
+
+                    TextBox txtCantidad = (TextBox)row.FindControl("TxtCantidad");
+                    cantidades[i] = Convert.ToInt32(txtCantidad.Text);
+                }
+
+                carrito.actualizarCantidades(idProductos, cantidades);
+            }
+            catch (FormatException) //No se ingreso un número en la cantidad
+            {
+                LabelError.Text = "* INGRESE UN NÚMERO ENTERO";
+            }
+            catch (SqlException ex) //Controla que haya stock del producto
+            {
+                LabelError.Text = "* " + ex.Message;
+            }
+            finally
+            {
+                actualizarCarrito();
+                master.actualizarCarrito();
+            }
+        }
+
+        private void actualizarCarrito()
+        {
+            GridDetalle.DataSource = carrito.listarDetalle();
+            GridDetalle.DataBind();
+
+            decimal total = carrito.totalCarrito();
+            if (total > 0)
+            {
+                LabelTotal.Text = string.Format("{0:c}", carrito.totalCarrito());
+            }
+            else
+            {
+                LabelTotalText.Text = "";
+                LabelTotal.Text = "";
+                TituloCarrito.InnerText = "Su carrito se encuentra vacío";
+                BtnActualizarCarrito.Visible = false;
+                BtnEliminaCarrito.Visible = false;
+                BtnConfirmaCompra.Visible = false;
+            }
+        }
 
     }
 }

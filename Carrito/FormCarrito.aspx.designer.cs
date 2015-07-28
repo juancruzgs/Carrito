@@ -13,13 +13,13 @@ namespace Carrito {
     public partial class FormCarrito {
         
         /// <summary>
-        /// Control BtnEliminaCarrito.
+        /// Control TituloCarrito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEliminaCarrito;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TituloCarrito;
         
         /// <summary>
         /// Control GridDetalle.
@@ -31,13 +31,13 @@ namespace Carrito {
         protected global::System.Web.UI.WebControls.GridView GridDetalle;
         
         /// <summary>
-        /// Control LabelError.
+        /// Control LabelTotalText.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelError;
+        protected global::System.Web.UI.WebControls.Label LabelTotalText;
         
         /// <summary>
         /// Control LabelTotal.
@@ -47,6 +47,33 @@ namespace Carrito {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelTotal;
+        
+        /// <summary>
+        /// Control LabelError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelError;
+        
+        /// <summary>
+        /// Control BtnEliminaCarrito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnEliminaCarrito;
+        
+        /// <summary>
+        /// Control BtnActualizarCarrito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnActualizarCarrito;
         
         /// <summary>
         /// Control BtnConfirmaCompra.

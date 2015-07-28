@@ -17,7 +17,7 @@ namespace Carrito
         {
             if (Eval("PrecioOferta").ToString() != "")
             {
-                return "$" + String.Format("{0:f2}", Eval("PrecioOferta"));
+                return String.Format("{0:c}", Eval("PrecioOferta"));
             }
             else
             {
@@ -25,15 +25,16 @@ namespace Carrito
             }
         }
 
+
         protected string getPrecioNormal()
         {
             if (Eval("PrecioNormal").ToString() != "")
             {
                 if (Eval("PrecioOferta").ToString() != "")
-                    return "<del>$" + String.Format("{0:f2}", Eval("PrecioNormal")) + "</del>";
+                    return "<del>" + String.Format("{0:c}", Eval("PrecioNormal")) + "</del>";
                 else
                 {
-                    return "<span style=\"color:Red;\"><strong>$" + String.Format("{0:f2}", Eval("PrecioNormal")) + "</strong></span>";
+                    return "<span style=\"color:Red;\"><strong>" + String.Format("{0:c}", Eval("PrecioNormal")) + "</strong></span>";
                 }
             }
             else
@@ -91,6 +92,7 @@ namespace Carrito
                 RepeaterItems.DataBind();
             }
         }
+
 
         protected void RepeaterItems_ItemCommand(object source, RepeaterCommandEventArgs e)
         {

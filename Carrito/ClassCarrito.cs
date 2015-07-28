@@ -36,15 +36,22 @@ namespace Carrito
 
         public int cantidadElementos()
         {
-            string cmd = "SELECT COUNT(*) FROM CarritoDetalle cd JOIN Carrito c on c.IdCarrito=cd.IdCarrito WHERE c.IdUsuario='" + idUsuario + "'";
+            string cmd = "SELECT SUM(cd.Cantidad) FROM CarritoDetalle cd JOIN Carrito c on c.IdCarrito=cd.IdCarrito WHERE c.IdUsuario='" + idUsuario + "'";
+            object resultado = conexion.ejecutarescalar(cmd);
 
-            int resultado = Convert.ToInt32(conexion.ejecutarescalar(cmd));
-            return resultado;
+            if (resultado == DBNull.Value)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(resultado);
+            }
         }
 
         public DataTable listarDetalle()
         {
-            string cmd = "SELECT p.IdProducto,p.Nombre,p.Descripcion,cd.Cantidad,cd.PrecioLista,cd.Subtotal,cd.TotalIva,cd.PrecioFinal"+
+            string cmd = "SELECT p.IdProducto,p.Nombre,cd.Cantidad,cd.PrecioLista,cd.Subtotal,cd.TotalIva,cd.PrecioFinal"+
                         " FROM CarritoDetalle cd JOIN Carrito c on c.IdCarrito=cd.IdCarrito JOIN Productos p on p.IdProducto=cd.IdProducto"+
                         " WHERE c.IdUsuario='" + idUsuario + "'";
             DataTable dtdetalle = conexion.leerdatos(cmd);
@@ -75,6 +82,13 @@ namespace Carrito
             catch (SqlException ex)
             {
                 throw ex;
+            }
+        }
+
+        public void actualizarCantidades(int[] idProductos, int[] cantidades) { 
+            //TODO Hacer clase con los 2 atributos
+            for (int i = 0; i < idProductos.Length; i++) {
+                actualizaCantidad(idProductos[i], cantidades[i]);
             }
         }
 
