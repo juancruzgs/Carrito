@@ -1,5 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PagMaestra.Master" AutoEventWireup="true" CodeBehind="FormConfirmaCompra.aspx.cs" Inherits="Carrito.FormConfirmaCompra" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <SCRIPT language=Javascript>
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+   </SCRIPT>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -53,7 +66,7 @@
         <label class="col-sm-1 control-label">Número</label>
         <div class="col-sm-10" style="width:200px">
 
-            <asp:TextBox id="TxtNumero" runat="server" class="form-control" ></asp:TextBox>
+            <asp:TextBox id="TxtNumero" runat="server" class="form-control" onkeypress="return isNumberKey(event)"></asp:TextBox>
 
         </div>   
     </div>
@@ -69,4 +82,7 @@
         </div>   
     </div>
 
+    <div>
+        <asp:Label ID="LabelError" runat="server" CssClass="labelerror"></asp:Label> 
+    </div>
 </asp:Content>

@@ -10,15 +10,15 @@ namespace Carrito
     {
         Conexion oconexion = new Conexion();
 
-        public void insertaCompra(int idUsuario, decimal totalEnvio)
+        public void insertaCompra(int idUsuario, decimal totalEnvio, string tarjeta, int tarjetaNumero)
         {
-            SqlParameter[] parametros = new SqlParameter[2];
+            SqlParameter[] parametros = new SqlParameter[4];
             parametros[0] = new SqlParameter("@IdUsuario", idUsuario);
             parametros[1] = new SqlParameter("@TotalEnvio", totalEnvio);
+            parametros[2] = new SqlParameter("@Tarjeta", tarjeta);
+            parametros[3] = new SqlParameter("@TarjetaNumero", tarjetaNumero);
 
             oconexion.ejecutarProc("InsertaCompra", parametros);
-         
-
         }
     }
 }

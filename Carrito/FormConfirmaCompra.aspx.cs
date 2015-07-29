@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.Data.SqlClient;
 
 namespace Carrito
 {
@@ -39,10 +40,26 @@ namespace Carrito
 
         protected void BtnConfirmaCompra_Click(object sender, EventArgs e)
         {
-            Compra compra = new Compra();
+            try
+            {
+                Compra compra = new Compra();
 
-            compra.insertaCompra(Convert.ToInt32(Session["Usuario"]), 10); //$10 de envio 
-            carrito.eliminaCarrito();
+                string tarjeta = ListaTipo.SelectedValue;
+                int tarjetaNumero = Convert.ToInt32(TxtNumero.Text);
+
+                compra.insertaCompra(Convert.ToInt32(Session["Usuario"]), 10, tarjeta, tarjetaNumero); //$10 de envio 
+                carrito.eliminaCarrito();
+
+                Response.Redirect("FormPrincipal.aspx");
+            }
+            catch (FormatException)
+            {
+                LabelError.Text = "* El número de tarjeta sólo puede contener caracteres númericos";
+            }
+            catch (SqlException ex)
+            {
+                LabelError.Text = "* No se pudo realizar la transacción";
+            }
         }
     }
 }
