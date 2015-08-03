@@ -48,13 +48,13 @@ namespace Carrito
         {
             if (!Page.IsPostBack)
             {
-                Productos productos = new Productos();
+                Producto productos = new Producto();
                 RepeaterItems.DataSource = productos.listarProductosEnOferta();
                 RepeaterItems.DataBind();
             }
 
-            Categorias categorias = new Categorias();
-            DataTable dtTable = categorias.traerCategorias();
+            Categoria categorias = new Categoria();
+            DataTable dtTable = categorias.listarCategorias();
 
             foreach (DataRow dtRow in dtTable.Rows)
             {
@@ -85,7 +85,7 @@ namespace Carrito
                     }
                 }
 
-                Productos oproductos = new Productos();
+                Producto oproductos = new Producto();
 
                 boton.CssClass = "list-group-item active"; //Seleccionar el boton clickeado
                 RepeaterItems.DataSource = oproductos.listarProductosPorCategoria(boton.Text);

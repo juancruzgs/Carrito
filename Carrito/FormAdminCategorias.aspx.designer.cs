@@ -22,6 +22,15 @@ namespace Carrito {
         protected global::System.Web.UI.WebControls.GridView GridCategorias;
         
         /// <summary>
+        /// Control SummaryGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary SummaryGrid;
+        
+        /// <summary>
         /// Control LabelError.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace Carrito {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtNuevaDescripcion;
+        
+        /// <summary>
+        /// Control RequiredDescripcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredDescripcion;
         
         /// <summary>
         /// Control BtnNuevaCategoria.

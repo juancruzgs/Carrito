@@ -1,14 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PagMaestra.Master" AutoEventWireup="true" CodeBehind="FormAdminProductos.aspx.cs" Inherits="Carrito.FormAdminProductos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-   
-    <style type="text/css"> 
-        
-        .hiddencol
-        {
-            display : none;
-        }
-        
-    </style>
 
     <SCRIPT language="javascript">
 
@@ -61,24 +52,28 @@
                 <asp:TemplateField HeaderText="Precio Unitario">
                     <ItemTemplate>
                         <asp:TextBox ID="TxtPrecioNormal" runat="server" onkeypress="return isNumberKey(event)" Width="100" Text='<%# Eval("PrecioNormal") %>'>
-                        </asp:TextBox>                
+                        </asp:TextBox>  
+                        <asp:RequiredFieldValidator ID="RequiredGridPrecio" runat="server" ControlToValidate="TxtPrecioNormal" SetFocusOnError="True" Text="*" ForeColor="Red" ValidationGroup="Grid" ErrorMessage="Complete el Precio Unitario"></asp:RequiredFieldValidator>              
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Precio Oferta">
                     <ItemTemplate>
                         <asp:TextBox ID="TxtPrecioOferta" runat="server" Width="100" onkeypress="return isNumberKey(event)" Text='<%# Eval("PrecioOferta") %>' >
-                        </asp:TextBox>                
+                        </asp:TextBox>  
+                        <asp:CompareValidator ID="CompareGridPrecios" runat="server" SetFocusOnError="True" Text="*" ForeColor="Red" ControlToValidate="TxtPrecioOferta" ControlToCompare="TxtPrecioNormal" Operator="LessThan" ValidationGroup="Grid" ErrorMessage="El precio unitario debe ser mayor al precio de oferta"></asp:CompareValidator>              
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Stock">
                     <ItemTemplate>
                         <asp:TextBox ID="TxtStock" runat="server" Width="60" Text='<%# Eval("StockActual") %>' TextMode="Number">
-                        </asp:TextBox>                
+                        </asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredGridStock" runat="server" ControlToValidate="TxtStock" SetFocusOnError="True" Text="*" ForeColor="Red" Display="Dynamic" ValidationGroup="Grid" ErrorMessage="Complete el Stock"></asp:RequiredFieldValidator>                
+                        <asp:RangeValidator ID="RangeGidrStock" runat="server" ControlToValidate="TxtStock" SetFocusOnError="True" Text="*" ForeColor="Red" MinimumValue="0" MaximumValue="9999" ValidationGroup="Grid" ErrorMessage="El stock debe ser positivo" ViewStateMode="Inherit"></asp:RangeValidator>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="BtnModificaProducto" runat="server" class="btn btn-success" Text="Modificar" CommandName="Modificar" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>'/>
+                        <asp:Button ID="BtnModificaProducto" runat="server" class="btn btn-success" Text="Modificar" CommandName="Modificar" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' ValidationGroup="Grid" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField>
@@ -95,6 +90,7 @@
     </div>
 
     <div>
+        <asp:ValidationSummary ID="SummaryGrid" runat="server" ValidationGroup="Grid" ForeColor="Red" />
         <asp:Label ID="LabelError" runat="server" CssClass="labelerror"></asp:Label> 
     </div>
 
@@ -104,75 +100,64 @@
     <div class="form-group">
         <label class="col-sm-1 control-label">Nombre</label>
         <div class="col-sm-10" style="width:200px">
-
-            <asp:TextBox id="TxtNuevoNombre" runat="server" class="form-control"></asp:TextBox>
-
-        </div>   
+            <asp:TextBox id="TxtNuevoNombre" runat="server" class="form-control"></asp:TextBox>            
+        </div>  
+        <asp:RequiredFieldValidator ID="RequiredNombre" runat="server" ControlToValidate="TxtNuevoNombre" SetFocusOnError="True" Text="* Complete el Nombre" ForeColor="Red" ValidationGroup="Nuevo"></asp:RequiredFieldValidator>
     </div>
-    <br /><br />
+    <br />
     <div class="form-group">
         <label class="col-sm-1 control-label">Descripcion</label>
         <div class="col-sm-10" style="width:200px">
-
             <asp:TextBox id="TxtNuevaDescripcion" runat="server" class="form-control"></asp:TextBox>
-
         </div>   
     </div>
     <br /><br />
     <div class="form-group">
         <label class="col-sm-1 control-label">Categoria</label>
         <div class="col-sm-10" style="width:200px">
-
             <asp:DropDownList ID="ListaNuevaCategoria" runat="server" class="form-control">
             </asp:DropDownList>   
-
         </div>   
     </div>
     <br /><br />
     <div class="form-group">
         <label class="col-sm-1 control-label">Foto</label>
         <div class="col-sm-10" style="width:200px">
-
                 <asp:FileUpload ID="FileUploadNuevaFoto" runat="server">
                 </asp:FileUpload>
-
         </div>   
     </div>
     <br /><br />
     <div class="form-group">
         <label class="col-sm-1 control-label">Precio Unitario</label>
         <div class="col-sm-10" style="width:200px">
-
             <asp:TextBox id="TxtNuevoPrecioUnitario" runat="server" class="form-control" onkeypress="return isNumberKey(event)"></asp:TextBox>
-
         </div>   
+        <asp:RequiredFieldValidator ID="RequiredPrecio" runat="server" ControlToValidate="TxtNuevoPrecioUnitario" SetFocusOnError="True" Text="* Complete el Precio" ForeColor="Red" ValidationGroup="Nuevo"></asp:RequiredFieldValidator>
     </div>
-    <br /><br />
+    <br />
     <div class="form-group">
         <label class="col-sm-1 control-label">Precio Oferta</label>
         <div class="col-sm-10" style="width:200px">
-
             <asp:TextBox id="TxtNuevoPrecioOferta" runat="server" class="form-control" onkeypress="return isNumberKey(event)"></asp:TextBox>
-
         </div>   
+        <asp:CompareValidator ID="ComparePrecios" runat="server" SetFocusOnError="True" Text="* El precio unitario debe ser mayor al precio de oferta" ForeColor="Red" ControlToValidate="TxtNuevoPrecioOferta" ControlToCompare="TxtNuevoPrecioUnitario" Operator="LessThan" ValidationGroup="Nuevo"></asp:CompareValidator>
     </div>
     <br /><br />
     <div class="form-group">
         <label class="col-sm-1 control-label">Stock</label>
         <div class="col-sm-10" style="width:200px">
-
             <asp:TextBox id="TxtNuevoStock" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
-
         </div>   
+        <asp:RequiredFieldValidator ID="RequiredStock" runat="server" ControlToValidate="TxtNuevoStock" SetFocusOnError="True" Text="* Complete el Stock" ForeColor="Red" Display="Dynamic" ValidationGroup="Nuevo"></asp:RequiredFieldValidator>
+        <asp:RangeValidator ID="RangeStock" runat="server" ControlToValidate="TxtNuevoStock" SetFocusOnError="True" Text="* Ingrese un número positivo" ForeColor="Red" MinimumValue="0" MaximumValue="9999" ValidationGroup="Nuevo"></asp:RangeValidator>
     </div>
-    <br /><br />
+    <br />
     <div class="form-group">
         <label class="col-sm-1 control-label"></label>
         <div class="col-sm-10" style="width:200px">
-
             <asp:Button ID="BtnNuevoProducto" runat="server" Text="Nuevo" 
-                class="btn btn-success" onclick="BtnNuevoProducto_Click" />
-
+                class="btn btn-success" onclick="BtnNuevoProducto_Click" ValidationGroup="Nuevo" />
         </div>   
     </div>
 

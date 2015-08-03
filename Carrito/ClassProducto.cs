@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace Carrito
 {
-    public class Productos
+    public class Producto
     {
         Conexion oconexion = new Conexion();
 

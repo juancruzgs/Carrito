@@ -1,15 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PagMaestra.Master" AutoEventWireup="true" CodeBehind="FormAdminCategorias.aspx.cs" Inherits="Carrito.FormAdminCategorias" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-    <style type="text/css"> 
-        
-        .hiddencol
-        {
-            display : none;
-        }
-        
-    </style>
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -28,12 +18,13 @@
                 <asp:TemplateField HeaderText="Descripcion">
                     <ItemTemplate>
                         <asp:TextBox ID="TxtDescripcion" runat="server" Text='<%# Eval("Descripcion") %>' >
-                        </asp:TextBox>                
+                        </asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredGridDescripcion" runat="server" ControlToValidate="TxtDescripcion" SetFocusOnError="True" Text="*" ForeColor="Red" ValidationGroup="Grid" ErrorMessage="Complete la Descripción"></asp:RequiredFieldValidator>                              
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="BtnModificaCategoria" runat="server" class="btn btn-success" Text="Modificar" CommandName="Modificar" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>'/>
+                        <asp:Button ID="BtnModificaCategoria" runat="server" class="btn btn-success" Text="Modificar" CommandName="Modificar" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' ValidationGroup="Grid" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField>
@@ -50,6 +41,7 @@
     </div>
 
     <div>
+        <asp:ValidationSummary ID="SummaryGrid" runat="server" ValidationGroup="Grid" ForeColor="Red" />
         <asp:Label ID="LabelError" runat="server" CssClass="labelerror"></asp:Label> 
     </div>
 
@@ -63,14 +55,15 @@
             <asp:TextBox id="TxtNuevaDescripcion" runat="server" class="form-control"></asp:TextBox>
 
         </div>   
+        <asp:RequiredFieldValidator ID="RequiredDescripcion" runat="server" ControlToValidate="TxtNuevaDescripcion" SetFocusOnError="True" Text="* Complete la Descripcion" ForeColor="Red" ValidationGroup="Nuevo"></asp:RequiredFieldValidator>
     </div>
-    <br /><br />
+    <br />
     <div class="form-group">
         <label class="col-sm-1 control-label"></label>
         <div class="col-sm-10" style="width:200px">
 
             <asp:Button ID="BtnNuevaCategoria" runat="server" Text="Nuevo" 
-                class="btn btn-success" onclick="BtnNuevaCategoria_Click" />
+                class="btn btn-success" onclick="BtnNuevaCategoria_Click" ValidationGroup="Nuevo" />
 
         </div>   
     </div>

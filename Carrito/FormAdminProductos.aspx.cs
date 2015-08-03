@@ -23,15 +23,15 @@ namespace Carrito
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Productos productos = new Productos();
+            Producto productos = new Producto();
 
             if (!Page.IsPostBack)
             {
                 GridProductos.DataSource = productos.listarProductos();
                 GridProductos.DataBind();
 
-                Categorias categorias = new Categorias();
-                ListaNuevaCategoria.DataSource = categorias.traerCategorias();
+                Categoria categorias = new Categoria();
+                ListaNuevaCategoria.DataSource = categorias.listarCategorias();
                 ListaNuevaCategoria.DataTextField = "Descripcion";
                 ListaNuevaCategoria.DataValueField = "IdCategoria";
                 ListaNuevaCategoria.DataBind();
@@ -42,7 +42,7 @@ namespace Carrito
         protected void GridProductos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             LabelError.Text = "";
-            Productos productos = new Productos();
+            Producto productos = new Producto();
 
             if (e.CommandName == "Eliminar")
             {
@@ -127,11 +127,11 @@ namespace Carrito
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Categorias categorias = new Categorias();
+                Categoria categorias = new Categoria();
 
                 //Find the DropDownList in the Row
                 DropDownList listaCategorias = (e.Row.FindControl("ListaCategorias") as DropDownList);
-                listaCategorias.DataSource = categorias.traerCategorias();
+                listaCategorias.DataSource = categorias.listarCategorias();
                 listaCategorias.DataTextField = "Descripcion";
                 listaCategorias.DataValueField = "IdCategoria";
                 listaCategorias.DataBind();
@@ -164,7 +164,7 @@ namespace Carrito
 
                 string imgPath = subirArchivo(FileUploadNuevaFoto);
 
-                Productos productos = new Productos();
+                Producto productos = new Producto();
                 productos.nuevoProducto(nombre, descripcion, idCategoria, precio, precioOferta, stock, imgPath);
 
                 GridProductos.DataSource = productos.listarProductos();

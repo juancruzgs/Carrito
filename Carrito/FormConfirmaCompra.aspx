@@ -39,6 +39,12 @@
 
     <div>
         <strong>
+            <asp:Label ID="LabelEnvioText" runat="server" CssClass="labeltotaltext" Text="Envio: "></asp:Label> 
+            <asp:Label ID="LabelEnvio" runat="server" CssClass="labeltotal"></asp:Label>
+        </strong>
+    </div>
+    <div>
+        <strong>
             <asp:Label ID="LabelTotalText" runat="server" CssClass="labeltotaltext" Text="Total: "></asp:Label> 
             <asp:Label ID="LabelTotal" runat="server" CssClass="labeltotal"></asp:Label>
         </strong>
@@ -68,16 +74,18 @@
 
             <asp:TextBox id="TxtNumero" runat="server" class="form-control" onkeypress="return isNumberKey(event)"></asp:TextBox>
 
-        </div>   
+        </div>  
+        <asp:RequiredFieldValidator ID="RequiredNumero" runat="server" ControlToValidate="TxtNumero" SetFocusOnError="True" Text="* Complete el Número de Tarjeta" ForeColor="Red" Display="Dynamic" ValidationGroup="Confirma"></asp:RequiredFieldValidator>
+        <asp:RangeValidator ID="RangeNumero" runat="server" ControlToValidate="TxtNumero" SetFocusOnError="True" Text="* Número de tarjeta incorrecto" ForeColor="Red" MinimumValue="1" MaximumValue="999999999" ValidationGroup="Confirma"></asp:RangeValidator> 
     </div>
 
-    <br /><br />
+    <br />
         <div class="form-group">
         <label class="col-sm-1 control-label"></label>
         <div class="col-sm-10" style="width:200px">
 
             <asp:Button ID="BtnConfirmaCompra" runat="server" Text="Confirmar" 
-                class="btn btn-success" onclick="BtnConfirmaCompra_Click"   />
+                class="btn btn-success" onclick="BtnConfirmaCompra_Click"   ValidationGroup="Confirma" />
 
         </div>   
     </div>

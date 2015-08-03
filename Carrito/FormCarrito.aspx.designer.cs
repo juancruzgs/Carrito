@@ -49,6 +49,15 @@ namespace Carrito {
         protected global::System.Web.UI.WebControls.Label LabelTotal;
         
         /// <summary>
+        /// Control SummaryGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary SummaryGrid;
+        
+        /// <summary>
         /// Control LabelError.
         /// </summary>
         /// <remarks>

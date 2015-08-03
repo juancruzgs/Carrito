@@ -1,31 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PagMaestra.Master" AutoEventWireup="true" CodeBehind="FormPrincipal.aspx.cs" Inherits="Carrito.FormPrincipal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
         
-        <link href="css/shop-item.css" rel="stylesheet" />
-        
-        <style type="text/css">
-            
-            .list-group-item {
-              color: #555;
-            }
-            .list-group-item .list-group-item-heading {
-              color: #333;
-            }
-            .list-group-item:hover,
-            .list-group-item:focus {
-              color: #555;
-              text-decoration: none;
-              background-color: #f5f5f5;
-            }
-            
-            #precios {
-              position: absolute; 
-              bottom: 50px; 
-              width: 242px; 
-              text-align: center; 
-              float: left; 
-            }
-        </style>
+    <link href="css/shop-item.css" rel="stylesheet" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

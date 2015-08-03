@@ -22,18 +22,18 @@ namespace Carrito
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Categorias categorias = new Categorias();
+            Categoria categorias = new Categoria();
 
             if (!Page.IsPostBack)
             {
-                GridCategorias.DataSource = categorias.traerCategorias();
+                GridCategorias.DataSource = categorias.listarCategorias();
                 GridCategorias.DataBind();
             }
         }
 
         protected void GridCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Categorias categorias = new Categorias();
+            Categoria categorias = new Categoria();
 
             if (e.CommandName == "Eliminar")
             {
@@ -51,7 +51,7 @@ namespace Carrito
                 }
                 finally
                 {
-                    GridCategorias.DataSource = categorias.traerCategorias();
+                    GridCategorias.DataSource = categorias.listarCategorias();
                     GridCategorias.DataBind();
                 }
             }
@@ -75,7 +75,7 @@ namespace Carrito
                 }
                 finally
                 {
-                    GridCategorias.DataSource = categorias.traerCategorias();
+                    GridCategorias.DataSource = categorias.listarCategorias();
                     GridCategorias.DataBind();
                 }
             }
@@ -89,10 +89,10 @@ namespace Carrito
 
                 string descripcion = TxtNuevaDescripcion.Text;
 
-                Categorias categorias = new Categorias();
+                Categoria categorias = new Categoria();
                 categorias.nuevaCategoria(descripcion);
 
-                GridCategorias.DataSource = categorias.traerCategorias();
+                GridCategorias.DataSource = categorias.listarCategorias();
                 GridCategorias.DataBind();
             }
             catch (SqlException)

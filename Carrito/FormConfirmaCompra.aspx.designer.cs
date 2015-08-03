@@ -22,6 +22,24 @@ namespace Carrito {
         protected global::System.Web.UI.WebControls.GridView GridDetalle;
         
         /// <summary>
+        /// Control LabelEnvioText.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelEnvioText;
+        
+        /// <summary>
+        /// Control LabelEnvio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelEnvio;
+        
+        /// <summary>
         /// Control LabelTotalText.
         /// </summary>
         /// <remarks>
@@ -56,6 +74,24 @@ namespace Carrito {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtNumero;
+        
+        /// <summary>
+        /// Control RequiredNumero.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredNumero;
+        
+        /// <summary>
+        /// Control RangeNumero.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeNumero;
         
         /// <summary>
         /// Control BtnConfirmaCompra.

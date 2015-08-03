@@ -22,6 +22,15 @@ namespace Carrito {
         protected global::System.Web.UI.WebControls.GridView GridProductos;
         
         /// <summary>
+        /// Control SummaryGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary SummaryGrid;
+        
+        /// <summary>
         /// Control LabelError.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace Carrito {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtNuevoNombre;
+        
+        /// <summary>
+        /// Control RequiredNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredNombre;
         
         /// <summary>
         /// Control TxtNuevaDescripcion.
@@ -76,6 +94,15 @@ namespace Carrito {
         protected global::System.Web.UI.WebControls.TextBox TxtNuevoPrecioUnitario;
         
         /// <summary>
+        /// Control RequiredPrecio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredPrecio;
+        
+        /// <summary>
         /// Control TxtNuevoPrecioOferta.
         /// </summary>
         /// <remarks>
@@ -85,6 +112,15 @@ namespace Carrito {
         protected global::System.Web.UI.WebControls.TextBox TxtNuevoPrecioOferta;
         
         /// <summary>
+        /// Control ComparePrecios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator ComparePrecios;
+        
+        /// <summary>
         /// Control TxtNuevoStock.
         /// </summary>
         /// <remarks>
@@ -92,6 +128,24 @@ namespace Carrito {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtNuevoStock;
+        
+        /// <summary>
+        /// Control RequiredStock.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredStock;
+        
+        /// <summary>
+        /// Control RangeStock.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeStock;
         
         /// <summary>
         /// Control BtnNuevoProducto.

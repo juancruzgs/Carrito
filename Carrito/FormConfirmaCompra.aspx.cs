@@ -13,6 +13,7 @@ namespace Carrito
     {
         Carrito carrito;
         PagMaestra master;
+        private static decimal ENVIO = 10;
 
         protected void Page_Preinit(object sender, EventArgs e)
         {
@@ -20,13 +21,20 @@ namespace Carrito
             if (!User.Identity.IsAuthenticated)
             {
                 FormsAuthentication.RedirectToLoginPage();
+            } 
+            else 
+            {
+                carrito = new Carrito(Convert.ToInt32(Session["Usuario"]));
+                if (carrito.totalCarrito() == 0)
+                {
+                    Response.Redirect("FormPrincipal.aspx");
+                }
             }
         }
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            carrito = new Carrito(Convert.ToInt32(Session["Usuario"]));
             master = (PagMaestra)this.Master;
 
             if (!Page.IsPostBack)
@@ -34,7 +42,8 @@ namespace Carrito
                 GridDetalle.DataSource = carrito.listarDetalle();
                 GridDetalle.DataBind();
 
-                LabelTotal.Text = string.Format("{0:c}", carrito.totalCarrito());
+                LabelEnvio.Text = string.Format("{0:c}", ENVIO);
+                LabelTotal.Text = string.Format("{0:c}", carrito.totalCarrito() + ENVIO);
             }
         }
 
@@ -49,7 +58,7 @@ namespace Carrito
                 string tarjeta = ListaTipo.SelectedValue;
                 int tarjetaNumero = Convert.ToInt32(TxtNumero.Text);
 
-                compra.insertaCompra(Convert.ToInt32(Session["Usuario"]), 10, tarjeta, tarjetaNumero); //$10 de envio 
+                compra.insertaCompra(Convert.ToInt32(Session["Usuario"]), ENVIO, tarjeta, tarjetaNumero); //$10 de envio 
                 carrito.eliminaCarrito();
 
                 Response.Redirect("FormPrincipal.aspx");
