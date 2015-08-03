@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PagMaestra.Master" AutoEventWireup="true" CodeBehind="FormConfirmaCompra.aspx.cs" Inherits="Carrito.FormConfirmaCompra" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <SCRIPT language=Javascript>
+    <SCRIPT language="javascript">
 
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode

@@ -42,6 +42,8 @@ namespace Carrito
         {
             try
             {
+                LabelError.Text = "";
+
                 Compra compra = new Compra();
 
                 string tarjeta = ListaTipo.SelectedValue;
@@ -56,7 +58,7 @@ namespace Carrito
             {
                 LabelError.Text = "* El número de tarjeta sólo puede contener caracteres númericos";
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 LabelError.Text = "* No se pudo realizar la transacción";
             }

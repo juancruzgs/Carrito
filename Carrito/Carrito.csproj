@@ -56,6 +56,9 @@
     <Content Include="css\shop-homepage.css" />
     <Content Include="css\shop-item.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="FormAdminCategorias.aspx" />
+    <Content Include="FormAdminCompras.aspx" />
+    <Content Include="FormAdminProductos.aspx" />
     <Content Include="FormCarrito.aspx" />
     <Content Include="FormConfirmaCompra.aspx" />
     <Content Include="FormLogin.aspx" />
@@ -80,6 +83,27 @@
     <Compile Include="ClassConexion.cs" />
     <Compile Include="ClassProducto.cs" />
     <Compile Include="ClassUsuario.cs" />
+    <Compile Include="FormAdminCategorias.aspx.cs">
+      <DependentUpon>FormAdminCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormAdminCategorias.aspx.designer.cs">
+      <DependentUpon>FormAdminCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdminCompras.aspx.cs">
+      <DependentUpon>FormAdminCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormAdminCompras.aspx.designer.cs">
+      <DependentUpon>FormAdminCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdminProductos.aspx.cs">
+      <DependentUpon>FormAdminProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormAdminProductos.aspx.designer.cs">
+      <DependentUpon>FormAdminProductos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FormCarrito.aspx.cs">
       <DependentUpon>FormCarrito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -109,7 +109,7 @@ namespace Carrito
                         master.insertaCarrito(idProducto, 1);
                         master.actualizarCarrito();
                     }
-                    catch (SqlException ex)
+                    catch (SqlException)
                     {
                         LabelError.Text = "* Ya existe el producto en su carrito";
                     }

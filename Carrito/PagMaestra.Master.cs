@@ -17,7 +17,11 @@ namespace Carrito
             BtnCerrarSesion.Visible = HttpContext.Current.User.Identity.IsAuthenticated;
             BtnIniciaSesion.Visible = !HttpContext.Current.User.Identity.IsAuthenticated;
             LabelBienvenida.Visible = HttpContext.Current.User.Identity.IsAuthenticated;
-            BtnCarrito.Visible = HttpContext.Current.User.Identity.IsAuthenticated; 
+            BtnCarrito.Visible = HttpContext.Current.User.Identity.IsAuthenticated;
+
+            BtnAdministrador.Visible = HttpContext.Current.User.Identity.IsAuthenticated && 
+                                        Session["Permiso"] != null && 
+                                        Convert.ToInt32(Session["Permiso"]) == 1;
 
             if (HttpContext.Current.User.Identity.IsAuthenticated && Session["Nombre"]!=null)
             {

@@ -43,12 +43,25 @@
                             <asp:Label ID="LabelBienvenida" runat="server" Text="Bienvenido" CssClass="bienvenido"></asp:Label>
                         </li>
                         <li>
+                            <div class="dropdown" ID="BtnAdministrador" runat="server">
+                              <button class="cerrarSesion dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Administrador
+                                <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="FormAdminCompras.aspx">Compras</a></li>
+                                <li><a href="FormAdminProductos.aspx">Productos</a></li>
+                                <li><a href="FormAdminCategorias.aspx">Categorias</a></li>
+                              </ul>
+                            </div>
+                        </li> 
+                        <li>
                             <asp:Button ID="BtnIniciaSesion" runat="server" Text="Iniciar Sesión" 
-                            CssClass="cerrarSesion" onclick="BtnIniciaSesion_Click" />
+                                CssClass="cerrarSesion" onclick="BtnIniciaSesion_Click" />
                         </li> 
                         <li>
                             <asp:Button ID="BtnCerrarSesion" runat="server" CssClass="cerrarSesion"
-                            Text="Cerrar Sesión" onclick="BtnCerrarSesion_Click"/>
+                                Text="Cerrar Sesión" onclick="BtnCerrarSesion_Click"/>
                         </li>
                     </ul>
                 </div>

@@ -42,10 +42,7 @@ namespace Carrito
         {
             if (e.CommandName == "EliminarProducto")
             {
-                int index = Convert.ToInt32(e.CommandArgument);
-                GridViewRow row = GridDetalle.Rows[index];
-
-                int idProducto = Convert.ToInt32(row.Cells[0].Text);
+                int idProducto = Convert.ToInt32(e.CommandArgument);
                 carrito.eliminaProductoDetalle(idProducto);
 
                 actualizarCarrito();
@@ -67,6 +64,8 @@ namespace Carrito
         {
             try 
             {
+                LabelError.Text = "";
+
                 int[] idProductos = new int[GridDetalle.Rows.Count];
                 int[] cantidades = new int[GridDetalle.Rows.Count];
                 for (int i = 0; i < GridDetalle.Rows.Count; i++)
@@ -81,11 +80,11 @@ namespace Carrito
 
                 carrito.actualizarCantidades(idProductos, cantidades);
             }
-            catch (FormatException) //No se ingreso un número en la cantidad
+            catch (FormatException)
             {
                 LabelError.Text = "* Ingrese un número entero positivo";
             }
-            catch (SqlException ex) //Controla que haya stock del producto
+            catch (SqlException)
             {
                 LabelError.Text = "* No hay stock del producto";
             }

@@ -10,87 +10,105 @@
 namespace Carrito {
     
     
-    public partial class PagMaestra {
+    public partial class FormAdminProductos {
         
         /// <summary>
-        /// Control siteCss.
+        /// Control GridProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlLink siteCss;
+        protected global::System.Web.UI.WebControls.GridView GridProductos;
         
         /// <summary>
-        /// Control head.
+        /// Control LabelError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Label LabelError;
         
         /// <summary>
-        /// Control form1.
+        /// Control TxtNuevoNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.TextBox TxtNuevoNombre;
         
         /// <summary>
-        /// Control BtnCarrito.
+        /// Control TxtNuevaDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCarrito;
+        protected global::System.Web.UI.WebControls.TextBox TxtNuevaDescripcion;
         
         /// <summary>
-        /// Control LabelBienvenida.
+        /// Control ListaNuevaCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelBienvenida;
+        protected global::System.Web.UI.WebControls.DropDownList ListaNuevaCategoria;
         
         /// <summary>
-        /// Control BtnAdministrador.
+        /// Control Foto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BtnAdministrador;
+        protected global::System.Web.UI.WebControls.TextBox Foto;
         
         /// <summary>
-        /// Control BtnIniciaSesion.
+        /// Control TxtNuevoPrecioUnitario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnIniciaSesion;
+        protected global::System.Web.UI.WebControls.TextBox TxtNuevoPrecioUnitario;
         
         /// <summary>
-        /// Control BtnCerrarSesion.
+        /// Control TxtNuevoPrecioOferta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCerrarSesion;
+        protected global::System.Web.UI.WebControls.TextBox TxtNuevoPrecioOferta;
         
         /// <summary>
-        /// Control ContentPlaceHolder1.
+        /// Control TxtNuevoStock.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.TextBox TxtNuevoStock;
+        
+        /// <summary>
+        /// Control BtnNuevoProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnNuevoProducto;
+        
+        /// <summary>
+        /// Control LabelErrorNuevo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelErrorNuevo;
     }
 }

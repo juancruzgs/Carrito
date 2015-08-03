@@ -9,25 +9,6 @@
         }
         
     </style>
-    
-    <SCRIPT language=Javascript>
-
-           function isNumberKey(evt) {
-               var charCode = (evt.which) ? evt.which : event.keyCode
-               if (charCode > 31 && (charCode < 48 || charCode > 57))
-                   return false;
-
-               return true;
-           }
-
-           function preguntar() {
-               eliminar = confirm("¿Está seguro que desea eliminar su carrito?");
-               if (eliminar) {
-                   document.getElementById('btnHandler').click();
-               }
-           }
-
-   </SCRIPT>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -47,7 +28,7 @@
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                 <asp:TemplateField HeaderText="Cantidad">
                     <ItemTemplate>
-                        <asp:TextBox ID="TxtCantidad" runat="server" Width="40" onkeypress="return isNumberKey(event)" Text='<%# Eval("Cantidad") %>' >
+                        <asp:TextBox ID="TxtCantidad" runat="server" Width="60" TextMode="Number" Text='<%# Eval("Cantidad") %>' >
                         </asp:TextBox>                
                     </ItemTemplate>
                 </asp:TemplateField>
@@ -57,7 +38,7 @@
                 <asp:BoundField DataField="PrecioFinal" HeaderText="Precio Final" DataFormatString="{0:c}" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="BtnEliminaProducto" runat="server" class="btn btn-danger" Text="Eliminar" CommandName="EliminarProducto" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"/>
+                        <asp:Button ID="BtnEliminaProducto" runat="server" class="btn btn-danger" Text="Eliminar" CommandName="EliminarProducto" CommandArgument='<%# Eval("IdProducto") %>'/>
                     </ItemTemplate>
                 </asp:TemplateField>
             
@@ -88,7 +69,6 @@
 
          <asp:Button ID="BtnConfirmaCompra" runat="server" Text="Confirmar Compra" 
                 class="btn btn-success" onclick="BtnConfirmaCompra_Click"  />
-
     </div>
 
 </asp:Content>
