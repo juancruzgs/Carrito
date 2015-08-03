@@ -20,6 +20,7 @@ namespace Carrito
             }
         }
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Productos productos = new Productos();
@@ -37,14 +38,14 @@ namespace Carrito
             }
         }
 
+
         protected void GridProductos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            LabelError.Text = "";
             Productos productos = new Productos();
 
             if (e.CommandName == "Eliminar")
             {
-                LabelError.Text = "";
-
                 int idProducto = Convert.ToInt32(e.CommandArgument);
 
                 try
@@ -65,8 +66,6 @@ namespace Carrito
             {
                 try
                 {
-                    LabelError.Text = "";
-
                     int index = Convert.ToInt32(e.CommandArgument);
                     GridViewRow row = GridProductos.Rows[index];
 
@@ -83,7 +82,10 @@ namespace Carrito
                     }
                     int stock = Convert.ToInt32((row.FindControl("TxtStock") as TextBox).Text);
 
-                    productos.modificaProducto(idProducto, descripcion, idCategoria, precio, precioOferta, stock);
+                    FileUpload fileUpload = (row.FindControl("FileUploadFoto") as FileUpload);
+                    string imgPath = subirArchivo(fileUpload);
+
+                    productos.modificaProducto(idProducto, descripcion, idCategoria, precio, precioOferta, stock, imgPath);
                 }
                 catch (FormatException)
                 {
@@ -100,6 +102,26 @@ namespace Carrito
                 }
             }
         }
+
+        private string subirArchivo(FileUpload fileUpload)
+        {
+            string imgPath = "";
+            if (fileUpload.HasFile == true)
+            {
+                if (fileUpload.PostedFile.ContentType == "image/jpeg")
+                {
+                    string imgName = fileUpload.FileName.ToString();
+                    imgPath = "/imgs/" + imgName;
+
+                    if (fileUpload.PostedFile != null && fileUpload.PostedFile.FileName != "")
+                    {
+                        fileUpload.SaveAs(Server.MapPath(imgPath));
+                    }
+                }
+            }
+            return imgPath;
+        }
+
 
         protected void GridProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -120,6 +142,7 @@ namespace Carrito
             }
         }
 
+
         protected void BtnNuevoProducto_Click(object sender, EventArgs e)
         {
             try
@@ -139,8 +162,10 @@ namespace Carrito
                 }
                 int stock = Convert.ToInt32(TxtNuevoStock.Text);
 
+                string imgPath = subirArchivo(FileUploadNuevaFoto);
+
                 Productos productos = new Productos();
-                productos.nuevoProducto(nombre, descripcion, idCategoria, precio, precioOferta, stock);
+                productos.nuevoProducto(nombre, descripcion, idCategoria, precio, precioOferta, stock, imgPath);
 
                 GridProductos.DataSource = productos.listarProductos();
                 GridProductos.DataBind();

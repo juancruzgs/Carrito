@@ -58,13 +58,13 @@ namespace Carrito {
         protected global::System.Web.UI.WebControls.DropDownList ListaNuevaCategoria;
         
         /// <summary>
-        /// Control Foto.
+        /// Control FileUploadNuevaFoto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Foto;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadNuevaFoto;
         
         /// <summary>
         /// Control TxtNuevoPrecioUnitario.

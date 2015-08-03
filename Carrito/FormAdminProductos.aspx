@@ -52,7 +52,12 @@
                         </asp:DropDownList>              
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="Foto" HeaderText="Foto" />
+                <asp:TemplateField HeaderText="Foto">
+                    <ItemTemplate>
+                        <asp:FileUpload ID="FileUploadFoto" runat="server">
+                        </asp:FileUpload>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Precio Unitario">
                     <ItemTemplate>
                         <asp:TextBox ID="TxtPrecioNormal" runat="server" onkeypress="return isNumberKey(event)" Width="100" Text='<%# Eval("PrecioNormal") %>'>
@@ -128,7 +133,8 @@
         <label class="col-sm-1 control-label">Foto</label>
         <div class="col-sm-10" style="width:200px">
 
-            <asp:TextBox id="Foto" runat="server" class="form-control"></asp:TextBox>
+                <asp:FileUpload ID="FileUploadNuevaFoto" runat="server">
+                </asp:FileUpload>
 
         </div>   
     </div>

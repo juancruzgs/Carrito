@@ -51,9 +51,9 @@ namespace Carrito
             oconexion.ejecutarProc("EliminaProducto", parametros);    
         }
 
-        public void modificaProducto(int idProducto, string descripcion, int idCategoria, decimal precio, decimal precioOferta, int stock)
+        public void modificaProducto(int idProducto, string descripcion, int idCategoria, decimal precio, decimal precioOferta, int stock, string imgPath)
         {
-            SqlParameter[] parametros = new SqlParameter[6];
+            SqlParameter[] parametros = new SqlParameter[7];
             parametros[0] = new SqlParameter("@IdProducto", idProducto);
             parametros[1] = new SqlParameter("@Descripcion", descripcion);
             parametros[2] = new SqlParameter("@IdCategoria", idCategoria);
@@ -69,13 +69,14 @@ namespace Carrito
             }
 
             parametros[5] = new SqlParameter("@Stock", stock);
+            parametros[6] = new SqlParameter("@Foto", imgPath); 
 
             oconexion.ejecutarProc("ModificaProducto", parametros);             
         }
 
-        public void nuevoProducto(string nombre, string descripcion, int idCategoria, decimal precio, decimal precioOferta, int stock)
+        public void nuevoProducto(string nombre, string descripcion, int idCategoria, decimal precio, decimal precioOferta, int stock, string imgPath)
         {
-            SqlParameter[] parametros = new SqlParameter[6];
+            SqlParameter[] parametros = new SqlParameter[7];
             parametros[0] = new SqlParameter("@Nombre", nombre);
             parametros[1] = new SqlParameter("@Descripcion", descripcion);
             parametros[2] = new SqlParameter("@IdCategoria", idCategoria);
@@ -91,6 +92,7 @@ namespace Carrito
             }
 
             parametros[5] = new SqlParameter("@Stock", stock);
+            parametros[6] = new SqlParameter("@Foto", imgPath); 
 
             oconexion.ejecutarProc("NuevoProducto", parametros);    
         }
