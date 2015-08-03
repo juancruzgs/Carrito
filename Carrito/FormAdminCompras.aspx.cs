@@ -28,8 +28,7 @@ namespace Carrito
 
             if (!Page.IsPostBack)
             {
-                GridCompras.DataSource = compra.listarCompras();
-                GridCompras.DataBind();
+                actualizarGrid();
             }
         }
 
@@ -41,14 +40,20 @@ namespace Carrito
             if (e.CommandName == "Confirmar")
             {
                 compra.confirmarCompra(idCompra);
-                GridCompras.DataSource = compra.listarCompras();
-                GridCompras.DataBind();
+                actualizarGrid();
             }
             else if (e.CommandName == "Detalle")
             {
                 GridDetalle.DataSource = compra.compraDetalle(idCompra);
                 GridDetalle.DataBind();
             }
+        }
+
+
+        private void actualizarGrid()
+        {
+            GridCompras.DataSource = compra.listarCompras();
+            GridCompras.DataBind();
         }
     }
 }

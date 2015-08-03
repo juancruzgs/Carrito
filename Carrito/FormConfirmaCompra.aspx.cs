@@ -12,7 +12,7 @@ namespace Carrito
     public partial class FormConfirmaCompra : System.Web.UI.Page
     {
         Carrito carrito;
-        PagMaestra master;
+        Compra compra;
         private static decimal ENVIO = 10;
 
         protected void Page_Preinit(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace Carrito
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            master = (PagMaestra)this.Master;
+            compra = new Compra();
 
             if (!Page.IsPostBack)
             {
@@ -52,8 +52,6 @@ namespace Carrito
             try
             {
                 LabelError.Text = "";
-
-                Compra compra = new Compra();
 
                 string tarjeta = ListaTipo.SelectedValue;
                 int tarjetaNumero = Convert.ToInt32(TxtNumero.Text);

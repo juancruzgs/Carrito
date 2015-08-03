@@ -19,6 +19,7 @@ namespace Carrito
             return dtProductos;
         }
 
+
         public DataTable listarProductosPorCategoria(int idCategoria)
         {
             string cmdtext = "SELECT p.IdProducto,p.Nombre,p.Descripcion,p.PrecioNormal,p.PrecioOferta,p.Foto "+
@@ -26,6 +27,7 @@ namespace Carrito
             DataTable dtProductos = oconexion.leerdatos(cmdtext);
             return dtProductos;
         }
+
 
         public DataTable listarProductosPorCategoria(string descripcionCategoria)
         {
@@ -35,6 +37,7 @@ namespace Carrito
             return dtProductos;
         }
 
+
         public DataTable listarProductosEnOferta()
         {
             string cmdtext = "SELECT IdProducto,Nombre,Descripcion,PrecioNormal,PrecioOferta,Foto " +
@@ -43,6 +46,7 @@ namespace Carrito
             return dtProductos;
         }
 
+
         public void eliminarProducto(int idProducto)
         {
             SqlParameter[] parametros = new SqlParameter[1];
@@ -50,6 +54,7 @@ namespace Carrito
 
             oconexion.ejecutarProc("EliminaProducto", parametros);    
         }
+
 
         public void modificaProducto(int idProducto, string descripcion, int idCategoria, decimal precio, decimal precioOferta, int stock, string imgPath)
         {
@@ -73,6 +78,7 @@ namespace Carrito
 
             oconexion.ejecutarProc("ModificaProducto", parametros);             
         }
+
 
         public void nuevoProducto(string nombre, string descripcion, int idCategoria, decimal precio, decimal precioOferta, int stock, string imgPath)
         {

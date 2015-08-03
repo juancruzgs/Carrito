@@ -31,15 +31,18 @@ namespace Carrito
             }
         }
 
+
         public void insertaCarrito(int idProducto, int cantidad)
         {
             carrito.insertaCarrito(idProducto, cantidad);
         }
 
+
         public void actualizarCarrito()
         {
             BtnCarrito.Text = "Carrito (" + carrito.cantidadElementos().ToString() + ")";
         }
+
 
         protected void BtnCerrarSesion_Click(object sender, EventArgs e)
         {
@@ -48,10 +51,12 @@ namespace Carrito
             Response.Redirect("FormPrincipal.aspx");
         }
 
+
         protected void BtnIniciaSesion_Click(object sender, EventArgs e)
         {
             FormsAuthentication.RedirectToLoginPage();
         }
+
 
         protected void BtnCarrito_Click(object sender, EventArgs e)
         {

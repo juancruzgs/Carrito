@@ -14,7 +14,7 @@
 <body>
     <div class="container">
     <form id="form1" class="form-signin" runat="server">   
-        <asp:Login ID="Login1" runat="server" onauthenticate="Login1_Authenticate">
+        <asp:Login ID="LoginComponent" runat="server" onauthenticate="LoginComponent_Authenticate">
             <LayoutTemplate>
                     <h2 class="form-signin-heading">Por favor Inicie Sesión</h2>
                     

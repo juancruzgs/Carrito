@@ -12,6 +12,7 @@ namespace Carrito
 {
     public partial class FormPrincipal : System.Web.UI.Page
     {
+        Producto producto;
 
         protected string getPrecioOferta()
         {
@@ -46,15 +47,16 @@ namespace Carrito
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            producto = new Producto();
+
             if (!Page.IsPostBack)
             {
-                Producto productos = new Producto();
-                RepeaterItems.DataSource = productos.listarProductosEnOferta();
+                RepeaterItems.DataSource = producto.listarProductosEnOferta();
                 RepeaterItems.DataBind();
             }
 
-            Categoria categorias = new Categoria();
-            DataTable dtTable = categorias.listarCategorias();
+            Categoria categoria = new Categoria();
+            DataTable dtTable = categoria.listarCategorias();
 
             foreach (DataRow dtRow in dtTable.Rows)
             {
@@ -71,7 +73,6 @@ namespace Carrito
 
         protected void BtnCategorias_Click(object sender, EventArgs e)
         {
-
             Button boton = (Button)sender;
             if (boton != null)
             {
@@ -85,10 +86,8 @@ namespace Carrito
                     }
                 }
 
-                Producto oproductos = new Producto();
-
                 boton.CssClass = "list-group-item active"; //Seleccionar el boton clickeado
-                RepeaterItems.DataSource = oproductos.listarProductosPorCategoria(boton.Text);
+                RepeaterItems.DataSource = producto.listarProductosPorCategoria(boton.Text);
                 RepeaterItems.DataBind();
             }
         }
@@ -111,7 +110,7 @@ namespace Carrito
                     }
                     catch (SqlException)
                     {
-                        LabelError.Text = "* Ya existe el producto en su carrito";
+                        LabelError.Text = "* Ya existe el producto en su carrito o no hay stock";
                     }
                 }
                 else

@@ -11,6 +11,9 @@ namespace Carrito
 {
     public partial class FormAdminProductos : System.Web.UI.Page
     {
+        Producto producto;
+        Categoria categoria;
+
         protected void Page_Preinit(object sender, EventArgs e)
         {
             /*Validar que el usuario este logeado y sea Administrador */
@@ -23,15 +26,14 @@ namespace Carrito
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Producto productos = new Producto();
+            producto = new Producto();
+            categoria = new Categoria();
 
             if (!Page.IsPostBack)
             {
-                GridProductos.DataSource = productos.listarProductos();
-                GridProductos.DataBind();
+                actualizarGrid();
 
-                Categoria categorias = new Categoria();
-                ListaNuevaCategoria.DataSource = categorias.listarCategorias();
+                ListaNuevaCategoria.DataSource = categoria.listarCategorias();
                 ListaNuevaCategoria.DataTextField = "Descripcion";
                 ListaNuevaCategoria.DataValueField = "IdCategoria";
                 ListaNuevaCategoria.DataBind();
@@ -39,10 +41,25 @@ namespace Carrito
         }
 
 
+        protected void GridProductos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DropDownList listaCategorias = (e.Row.FindControl("ListaCategorias") as DropDownList);
+                listaCategorias.DataSource = categoria.listarCategorias();
+                listaCategorias.DataTextField = "Descripcion";
+                listaCategorias.DataValueField = "IdCategoria";
+                listaCategorias.DataBind();
+
+                string textCategoria = (e.Row.FindControl("TxtCategoria") as Label).Text;
+                listaCategorias.Items.FindByText(textCategoria).Selected = true;
+            }
+        }
+
+
         protected void GridProductos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             LabelError.Text = "";
-            Producto productos = new Producto();
 
             if (e.CommandName == "Eliminar")
             {
@@ -50,16 +67,12 @@ namespace Carrito
 
                 try
                 {
-                    productos.eliminarProducto(idProducto);
+                    producto.eliminarProducto(idProducto);
+                    actualizarGrid();
                 }
                 catch (SqlException)
                 {
                     LabelError.Text = "* El producto ya fue comprado por alguien y no se puede eliminar";
-                }
-                finally
-                {
-                    GridProductos.DataSource = productos.listarProductos();
-                    GridProductos.DataBind();
                 }
             }
             else if (e.CommandName == "Modificar")
@@ -85,7 +98,8 @@ namespace Carrito
                     FileUpload fileUpload = (row.FindControl("FileUploadFoto") as FileUpload);
                     string imgPath = subirArchivo(fileUpload);
 
-                    productos.modificaProducto(idProducto, descripcion, idCategoria, precio, precioOferta, stock, imgPath);
+                    producto.modificaProducto(idProducto, descripcion, idCategoria, precio, precioOferta, stock, imgPath);
+                    actualizarGrid();
                 }
                 catch (FormatException)
                 {
@@ -95,50 +109,6 @@ namespace Carrito
                 {
                     LabelError.Text = "* Verifique el precio unitario sea mayor al precio de oferta y los valores sean positivos";
                 }
-                finally
-                {
-                    GridProductos.DataSource = productos.listarProductos();
-                    GridProductos.DataBind();
-                }
-            }
-        }
-
-        private string subirArchivo(FileUpload fileUpload)
-        {
-            string imgPath = "";
-            if (fileUpload.HasFile == true)
-            {
-                if (fileUpload.PostedFile.ContentType == "image/jpeg")
-                {
-                    string imgName = fileUpload.FileName.ToString();
-                    imgPath = "/imgs/" + imgName;
-
-                    if (fileUpload.PostedFile != null && fileUpload.PostedFile.FileName != "")
-                    {
-                        fileUpload.SaveAs(Server.MapPath(imgPath));
-                    }
-                }
-            }
-            return imgPath;
-        }
-
-
-        protected void GridProductos_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                Categoria categorias = new Categoria();
-
-                //Find the DropDownList in the Row
-                DropDownList listaCategorias = (e.Row.FindControl("ListaCategorias") as DropDownList);
-                listaCategorias.DataSource = categorias.listarCategorias();
-                listaCategorias.DataTextField = "Descripcion";
-                listaCategorias.DataValueField = "IdCategoria";
-                listaCategorias.DataBind();
-
-                //Select the Country of Customer in DropDownList
-                string country = (e.Row.FindControl("TxtCategoria") as Label).Text;
-                listaCategorias.Items.FindByText(country).Selected = true;
             }
         }
 
@@ -164,11 +134,8 @@ namespace Carrito
 
                 string imgPath = subirArchivo(FileUploadNuevaFoto);
 
-                Producto productos = new Producto();
-                productos.nuevoProducto(nombre, descripcion, idCategoria, precio, precioOferta, stock, imgPath);
-
-                GridProductos.DataSource = productos.listarProductos();
-                GridProductos.DataBind();
+                producto.nuevoProducto(nombre, descripcion, idCategoria, precio, precioOferta, stock, imgPath);
+                actualizarGrid();
             }
             catch (FormatException)
             {
@@ -178,6 +145,33 @@ namespace Carrito
             {
                 LabelErrorNuevo.Text = "* Verifique el precio unitario sea mayor al precio de oferta y los valores sean positivos";
             }
+        }
+
+
+        private void actualizarGrid()
+        {
+            GridProductos.DataSource = producto.listarProductos();
+            GridProductos.DataBind();
+        }
+
+
+        private string subirArchivo(FileUpload fileUpload)
+        {
+            string imgPath = "";
+            if (fileUpload.HasFile == true)
+            {
+                if (fileUpload.PostedFile.ContentType == "image/jpeg")
+                {
+                    string imgName = fileUpload.FileName.ToString();
+                    imgPath = "/imgs/" + imgName;
+
+                    if (fileUpload.PostedFile != null && fileUpload.PostedFile.FileName != "")
+                    {
+                        fileUpload.SaveAs(Server.MapPath(imgPath));
+                    }
+                }
+            }
+            return imgPath;
         }
     }
 }

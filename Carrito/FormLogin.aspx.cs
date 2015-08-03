@@ -17,18 +17,18 @@ namespace Carrito
 
         }
 
-        protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
+        protected void LoginComponent_Authenticate(object sender, AuthenticateEventArgs e)
         {
-            Usuario ousuario = new Usuario();
+            Usuario usuario = new Usuario();
 
-            DataTable dt = ousuario.infoUsuario(Login1.UserName, Login1.Password);
+            DataTable dt = usuario.infoUsuario(LoginComponent.UserName, LoginComponent.Password);
             if (dt.Rows.Count != 0)
             {
                 Session["Usuario"] = dt.Rows[0][0].ToString();
                 Session["Permiso"] = dt.Rows[0][1].ToString();
                 Session["Nombre"] = dt.Rows[0][2].ToString();
 
-                FormsAuthentication.RedirectFromLoginPage(Login1.UserName, false);
+                FormsAuthentication.RedirectFromLoginPage(LoginComponent.UserName, false);
                 
             }
         }

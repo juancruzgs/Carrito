@@ -41,6 +41,7 @@ namespace Carrito
             return dtdetalle;
         }
 
+
         public void confirmarCompra(int idCompra)
         {
             SqlParameter[] parametros = new SqlParameter[1];

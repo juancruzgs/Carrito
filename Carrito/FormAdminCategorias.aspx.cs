@@ -11,6 +11,8 @@ namespace Carrito
 {
     public partial class FormAdminCategorias : System.Web.UI.Page
     {
+        Categoria categoria;
+
         protected void Page_Preinit(object sender, EventArgs e)
         {
             /*Validar que el usuario este logeado y sea Administrador */
@@ -20,63 +22,52 @@ namespace Carrito
             }
         }
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            Categoria categorias = new Categoria();
+            categoria = new Categoria();
 
             if (!Page.IsPostBack)
             {
-                GridCategorias.DataSource = categorias.listarCategorias();
-                GridCategorias.DataBind();
+                actualizarGrid();
             }
         }
 
+
         protected void GridCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Categoria categorias = new Categoria();
+            LabelError.Text = "";
 
             if (e.CommandName == "Eliminar")
             {
-                LabelError.Text = "";
-
                 int idCategoria = Convert.ToInt32(e.CommandArgument);
 
                 try
                 {
-                    categorias.eliminarCategoria(idCategoria);
+                    categoria.eliminarCategoria(idCategoria);
+                    actualizarGrid();
                 }
                 catch (SqlException)
                 {
                     LabelError.Text = "* No se puedo eliminar la categoría porque tiene productos asignados a ella";
-                }
-                finally
-                {
-                    GridCategorias.DataSource = categorias.listarCategorias();
-                    GridCategorias.DataBind();
                 }
             }
             else if (e.CommandName == "Modificar")
             {
                 try
                 {
-                    LabelError.Text = "";
-
                     int index = Convert.ToInt32(e.CommandArgument);
                     GridViewRow row = GridCategorias.Rows[index];
 
                     int idCategoria = Convert.ToInt32(row.Cells[0].Text);
                     string descripcion = (row.FindControl("TxtDescripcion") as TextBox).Text;
 
-                    categorias.modificarCategoria(idCategoria, descripcion);
+                    categoria.modificarCategoria(idCategoria, descripcion);
+                    actualizarGrid();
                 }
                 catch (SqlException)
                 {
                     LabelError.Text = "* No se puedo realizar la operación solicitada";
-                }
-                finally
-                {
-                    GridCategorias.DataSource = categorias.listarCategorias();
-                    GridCategorias.DataBind();
                 }
             }
         }
@@ -89,16 +80,20 @@ namespace Carrito
 
                 string descripcion = TxtNuevaDescripcion.Text;
 
-                Categoria categorias = new Categoria();
-                categorias.nuevaCategoria(descripcion);
-
-                GridCategorias.DataSource = categorias.listarCategorias();
-                GridCategorias.DataBind();
+                categoria.nuevaCategoria(descripcion);
+                actualizarGrid();
             }
             catch (SqlException)
             {
                 LabelErrorNuevo.Text = "* Verifique el precio unitario sea mayor al precio de oferta y los valores sean positivos";
             }
+        }
+
+
+        private void actualizarGrid()
+        {
+            GridCategorias.DataSource = categoria.listarCategorias();
+            GridCategorias.DataBind();
         }
     }
 }

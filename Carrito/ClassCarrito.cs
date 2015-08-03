@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data; //Conexion a base de datos
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Carrito
@@ -16,7 +16,8 @@ namespace Carrito
         {
             this.idUsuario = idUsuario;
         }
-       
+
+
         public void insertaCarrito(int idProducto, int cantidad)
         {
             SqlParameter[] parametros = new SqlParameter[3];
@@ -26,13 +27,14 @@ namespace Carrito
 
             try
             {
-            conexion.ejecutarProc("InsertaDetalle", parametros);
+                conexion.ejecutarProc("InsertaDetalle", parametros);
             }
             catch (SqlException ex)
             {
                 throw ex;
             }
         }
+
 
         public int cantidadElementos()
         {
@@ -49,24 +51,27 @@ namespace Carrito
             }
         }
 
+
         public DataTable listarDetalle()
         {
-            string cmd = "SELECT p.IdProducto,p.Nombre,cd.Cantidad,cd.PrecioLista,cd.Subtotal,cd.TotalIva,cd.PrecioFinal"+
-                        " FROM CarritoDetalle cd JOIN Carrito c on c.IdCarrito=cd.IdCarrito JOIN Productos p on p.IdProducto=cd.IdProducto"+
+            string cmd = "SELECT p.IdProducto,p.Nombre,cd.Cantidad,cd.PrecioLista,cd.Subtotal,cd.TotalIva,cd.PrecioFinal" +
+                        " FROM CarritoDetalle cd JOIN Carrito c on c.IdCarrito=cd.IdCarrito JOIN Productos p on p.IdProducto=cd.IdProducto" +
                         " WHERE c.IdUsuario='" + idUsuario + "'";
             DataTable dtdetalle = conexion.leerdatos(cmd);
-           
+
             return dtdetalle;
         }
+
 
         public void eliminaProductoDetalle(int idProducto)
         {
             SqlParameter[] parametros = new SqlParameter[2];
             parametros[0] = new SqlParameter("@IdUsuario", idUsuario);
             parametros[1] = new SqlParameter("@IdProducto", idProducto);
-           
+
             conexion.ejecutarProc("EliminaProductoDetalle", parametros);
         }
+
 
         public void actualizaCantidad(int idProducto, int cantidad)
         {
@@ -85,12 +90,16 @@ namespace Carrito
             }
         }
 
-        public void actualizarCantidades(int[] idProductos, int[] cantidades) { 
+
+        public void actualizarCantidades(int[] idProductos, int[] cantidades)
+        {
             //TODO Hacer clase con los 2 atributos
-            for (int i = 0; i < idProductos.Length; i++) {
+            for (int i = 0; i < idProductos.Length; i++)
+            {
                 actualizaCantidad(idProductos[i], cantidades[i]);
             }
         }
+
 
         public void eliminaCarrito()
         {
@@ -100,11 +109,12 @@ namespace Carrito
             conexion.ejecutarProc("EliminaCarrito", parametros);
         }
 
+
         public decimal totalCarrito()
         {
             string cmd = "SELECT Total FROM Carrito WHERE IdUsuario='" + idUsuario + "'";
 
-            decimal resultado=Convert.ToDecimal( conexion.ejecutarescalar(cmd));
+            decimal resultado = Convert.ToDecimal(conexion.ejecutarescalar(cmd));
             return resultado;
         }
     }

@@ -81,7 +81,6 @@
     <Compile Include="ClassCategoria.cs" />
     <Compile Include="ClassCompra.cs" />
     <Compile Include="ClassConexion.cs" />
-    <Compile Include="ClassDatabase.cs" />
     <Compile Include="ClassProducto.cs" />
     <Compile Include="ClassUsuario.cs" />
     <Compile Include="FormAdminCategorias.aspx.cs">
