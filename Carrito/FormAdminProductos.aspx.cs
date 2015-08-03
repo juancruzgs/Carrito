@@ -39,12 +39,13 @@ namespace Carrito
 
         protected void GridProductos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            Productos productos = new Productos();
+
             if (e.CommandName == "Eliminar")
             {
-                int idProducto = Convert.ToInt32(e.CommandArgument);
-
-                Productos productos = new Productos();
                 LabelError.Text = "";
+
+                int idProducto = Convert.ToInt32(e.CommandArgument);
 
                 try
                 {
@@ -62,8 +63,6 @@ namespace Carrito
             }
             else if (e.CommandName == "Modificar")
             {
-                Productos productos = new Productos();
-
                 try
                 {
                     LabelError.Text = "";

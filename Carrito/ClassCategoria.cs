@@ -18,5 +18,30 @@ namespace Carrito
            return dtcategorias;
        }
 
+       public void eliminarCategoria(int idCategoria)
+       {
+           SqlParameter[] parametros = new SqlParameter[1];
+           parametros[0] = new SqlParameter("@IdCategoria", idCategoria);
+
+           oconexion.ejecutarProc("EliminaCategoria", parametros);           
+       }
+
+
+       public void modificarCategoria(int idCategoria, string descripcion) 
+       {
+           SqlParameter[] parametros = new SqlParameter[2];
+           parametros[0] = new SqlParameter("@IdCategoria", idCategoria);
+           parametros[1] = new SqlParameter("@Descripcion", descripcion);
+
+           oconexion.ejecutarProc("ModificaCategoria", parametros);         
+       }
+
+       public void nuevaCategoria(string descripcion)
+       {
+           SqlParameter[] parametros = new SqlParameter[1];
+           parametros[0] = new SqlParameter("@Descripcion", descripcion);
+
+           oconexion.ejecutarProc("NuevaCategoria", parametros);     
+       }
     }
 }
